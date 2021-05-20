@@ -1,0 +1,102 @@
+@import "../../stylesheets/util";
+
+.m-login-wrap {
+  width: 100vw;
+  font-family: "Noto Sans Korean", sans-serif;
+  z-index: 10000;
+  position: absolute;
+  top: 0;
+  left: 0;
+  background-color: #FFFFFF;
+  .m-login-container {
+    width: 100vw;
+    padding: 1.5rem 20px;
+    margin: 0 auto;
+    position: relative;
+
+    .m-logo {
+      width: 5.5rem;
+      margin-bottom: 10vh;
+      img {
+        width: 100%;
+      }
+    }
+
+    .m-page-num {
+      display: flex;
+      align-items: center;
+      .m-step {
+        width: 1.5rem;
+        height: 1.5rem;
+        border: 1px solid #505050;
+        border-radius: 50%;
+        color: #505050;
+        display: flex;
+        justify-content: center;
+        // align-items: center;
+        line-height: 26px;
+        font-size: 12px;
+      }
+      .m-step-on {
+        color: #FFFFFF;
+        background-color: #EF0050;
+        border: 0px
+      }
+      .m-line {
+        width: 40px;
+        height: 0;
+        border-top: 1px solid #505050;
+      }
+    }
+
+    .m-title {
+      margin-top: 20px;
+      font-size: 30px;
+      line-height: 36px;
+      color: #212121;
+      font-weight: bold;
+      letter-spacing: -0.2px;
+      .m-orange {
+        color: #EF0050;
+      }
+    }
+
+    .m-img-area {
+      margin-top: 38px;
+      position: relative;
+      height: 30vh;
+      img {
+        position: absolute;
+        top: 0;
+        left: -20px;
+        width: 100vw;
+        height: 100%;
+      }
+    }
+
+    button {
+      margin-top: 8vh;
+      width: 100% !important;
+      font-weight: 700;
+      text-align: left !important;
+      position: relative;
+      display: flex !important;
+      align-items: center !important;
+      justify-content: center !important;
+      &::before {
+        content: '';
+        display: block;
+        width: 24px;
+        height: 24px;
+        margin-right: 8px;
+        background-image: url('https://knotehow-image.s3.ap-northeast-2.amazonaws.com/1620109982262.png');
+        background-repeat: no-repeat;
+        background-size: cover;
+      }
+    }
+
+    
+  }
+}
+
+  

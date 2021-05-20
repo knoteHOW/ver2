@@ -1,0 +1,182 @@
+@import "../../stylesheets/util";
+
+.home-wrap {
+  background-color: rgb(0,0,0);
+
+  .home-container {
+    margin: 80px auto 0;
+    padding: 0 30px;
+    width: 1400px;
+    height: 704px;
+    position: relative;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+
+    .home-back-img {
+      background-size: 100%;
+      position: absolute;
+      top: 115px;
+
+      &.left-main {
+        width: 214.65px;
+        height: 277.65px;
+        background-image: url('../../img/background/left-main.png');
+        left: 10px;
+      }
+
+      &.right-main {
+        width: 224.1px;
+        height: 301.95px;
+        background-image: url('../../img/background/right-main.png');
+        right: 10px;
+      }
+    }
+
+    .home-top-img {
+      display: none;
+    }
+
+    .home-heading-area {
+      width: 905px;
+      height: 272px;
+      margin-top: 114px;
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      align-items: center;
+      font-size: 100px;
+      font-weight: 900;
+      letter-spacing: 0;
+      color: #fff;
+    }
+
+    .home-heading-sub-area {
+      margin-top: 17px;
+      width: 564px;
+      height: 72px;
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      align-items: center;
+      color: #fff;
+      font-size: 25px;
+    }
+
+    .home-search-area {
+      margin-top: 69px;
+      width: 892px;
+      height: 63px;
+      display: flex;
+
+      select, .home-select-btn {
+        width: 200px;
+        height: 63px;
+        margin: 0 10px;
+        border-radius: 5px;
+        padding-left: 20px;
+        font-size: 18px;
+        font-weight: bold;
+        position: relative;
+      }
+
+      .home-select-btn {
+        width: 212px;
+        cursor: pointer;
+        padding: 0;
+        background: #EF0050 0% 0% no-repeat padding-box;
+        color: #fff;
+        font-size: 22px;
+        font-weight: bold;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+      }
+
+      select {
+        -webkit-box-sizing: border-box;
+        -moz-box-sizing: border-box;
+        box-sizing: border-box;
+        -webkit-appearance: none;
+        -moz-appearance: none;
+
+        background-image:
+                linear-gradient(60deg, transparent 50%, #EF0050 50%),
+                linear-gradient(120deg, #EF0050 50%, transparent 50%);
+        background-position:
+                calc(100% - 22.5px),
+                calc(100% - 15px);
+        background-size:
+                7.5px 11px,
+                7.5px 11px;
+        background-repeat: no-repeat;
+      }
+    }
+  }
+
+  @include respond-to(mobile) {
+    .home-container {
+      margin-top: 56px;
+      width: 88.9vw;
+      height: auto;
+      padding: 0;
+
+      display: block;
+
+      .home-back-img {
+        display: none;
+      }
+
+      .home-top-img {
+        display: block;
+        width: 212px;
+        height: 130px;
+        margin: 0 auto;
+        background-image: url('../../img/background/top-main.svg');
+        background-size: contain;
+        background-repeat: no-repeat;
+      }
+
+
+      .home-heading-area {
+        width: 88.9vw;
+        height: auto;
+        line-height: 42px;
+        margin: 26px auto 0;
+        text-align: center;
+        font-size: 30px;
+        justify-content: unset;
+      }
+
+      .home-heading-sub-area {
+        margin-top: 20px;
+        width: 88.9vw;
+        height: auto;
+        text-align: center;
+        font-size: 18px;
+        line-height: 26px;
+        span {
+          display: inline-block;
+        }
+      }
+
+      .home-search-area {
+        margin-top: 36px;
+        width: 88.9vw;
+        height: auto;
+        display: flex;
+        flex-wrap: wrap;
+        padding-bottom: 24px;
+
+        select, .home-select-btn {
+          width: 88.9vw;
+          height: 48px;
+          margin: 8px 0;
+          padding-left: 16px;
+          font-size: 16px;
+          position: relative;
+        }
+      }
+    }
+  }
+}

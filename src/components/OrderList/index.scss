@@ -1,0 +1,180 @@
+@import "../../stylesheets/util";
+
+.orders-container {
+
+  .order-list {
+    margin: 0;
+    padding: 0;
+    .row {
+      display: flex;
+      font-size: 15px;
+      font-weight: bold;
+      color: #505050;
+      text-align: center;
+      margin-top: 22px;
+      height: 32px;
+      line-height: 32px;
+
+      .created-at {
+        width: 178px;
+      }
+
+      .amount {
+        width: 218px;
+        color: #EF0050;
+      }
+
+      .pass-type {
+        width: 356px;
+      }
+
+      .payment-method {
+        width: 171px;
+      }
+
+      .receipt {
+        width: 234px;
+      }
+
+      .etc {
+        width: 123px;
+      }
+
+      &.list-title {
+        fint-size: 20px;
+        height: 40px;
+        color: #000;
+        padding-bottom: 8px;
+        border-bottom: 1px solid #707070;
+        margin-bottom: 6px;
+
+        .amount {
+          color: #000;
+        }
+      }
+    }
+  }
+
+  .ant-pagination {
+    margin-top: 57px;
+    text-align: center;
+
+    .ant-pagination-item {
+      margin-left: 12px;
+      border: 1.5px solid #E8E8E8;
+      background-color: #FAFAFA;
+      a {
+        color: #6D6D6D;
+      }
+
+      &.ant-pagination-item-0 {
+        margin-left: 0;
+      }
+
+      &.ant-pagination-item-active {
+        background-color: #EF0050;
+        border: 1.5px solid #EF0050;
+
+        a {
+          color: #fff;
+        }
+      }
+    }
+  }
+
+  @include respond-to(mobile) {
+
+    .order-list {
+      margin: 0 auto;
+      padding: 0;
+      width: 100vw;
+
+      .row {
+        padding: 0 5.5vw 25px;
+        display: grid;
+        grid-template-columns: 180px 140px;
+        grid-template-rows: 47px 19px;
+        font-size: 16px;
+        text-align: left;
+        margin-top: 22px;
+        height: auto;
+        line-height: 23px;
+        border-bottom: 1px solid #E8E8E8;
+
+        .created-at {
+          order: 3;
+          width: fit-content;
+          font-size: 14px;
+          font-weight: normal;
+          line-height: 20px;
+        }
+
+        .amount {
+          order: 2;
+          width: auto;
+          text-align: right;
+        }
+
+        .pass-type {
+          order: 1;
+          width: auto;
+          text-align: left;
+        }
+
+        .payment-method {
+          order: 4;
+          width: fit-content;
+          font-size: 14px;
+          font-weight: normal;
+          line-height: 20px;
+        }
+
+        .receipt {
+          display: none;
+        }
+
+        .etc {
+          display: none;
+        }
+
+        &.list-title {
+          display: none;
+        }
+      }
+    }
+  }
+}
+
+.receipt-modal {
+  .ant-modal-body {
+    padding: 40px 32px 20px;
+    .modal-title {
+      text-align: center;
+      font-size: 30px;
+      line-height: 45px;
+    }
+
+    .info-list {
+      margin-top: 64px;
+
+      .ant-row {
+        display: flex;
+        margin-bottom: 16px;
+
+        .key {
+          font-size: 16px;
+          line-height: 24px;
+          color: #BEBEBE;
+        }
+
+        .val {
+          margin-left: auto;
+          font-size: 16px;
+          line-height: 24px;
+          color: #000;
+        }
+      }
+    }
+  }
+
+}

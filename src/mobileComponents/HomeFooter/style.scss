@@ -1,0 +1,24 @@
+.m-hf-wrap {
+  position: fixed;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  .m-hf-heading {
+    padding: 4px 0;
+    background-color: #BEBEBE;
+    color: #FFFFFF;
+    font-size: 11px;
+    text-align: center;
+  }
+  .m-hf-body {
+    padding: 4px 20px;
+    background-color: #FFFFFF;
+    > p {
+      font-size: 14px;
+      > span {
+        font-weight: bold;
+        color: #EF0050;
+      }
+    }
+  }
+}

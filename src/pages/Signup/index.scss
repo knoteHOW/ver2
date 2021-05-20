@@ -1,0 +1,244 @@
+@import "../../stylesheets/util";
+
+.signup-wrap {
+  width: 100%;
+  // overflow: auto;
+  overflow-y: hidden;
+  font-family: "Noto Sans Korean", sans-serif;
+  z-index: 1000;
+  position: absolute;
+  top:0;
+  left: 0;
+  background-color: #FFFFFF;
+  .signup-container {
+    width: calc(1280px + 60px);
+    display: flex;
+    padding: 0px 30px 0px 30px;
+    margin: 0 auto;
+    position: relative;
+    .form-wrapper {
+      min-width: 720px;
+      .content {
+        width: 432px;
+        min-height: 100vh;
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+  
+        .logo {
+          width: 145px;
+          margin-bottom: 24px;
+          img {
+            width: 100%;
+          }
+        }
+  
+        .page-num {
+          display: flex;
+          align-items: center;
+          .step {
+            width: 24px;
+            height: 24px;
+            border: 1px solid #505050;
+            border-radius: 50%;
+            color: #505050;
+            display: flex;
+            justify-content: center;
+            // align-items: center;
+            line-height: 26px;
+            font-size: 12px;
+          }
+          .step-on {
+            color: #FFFFFF;
+            background-color: #EF0050;
+            border: 0px
+          }
+          .line {
+            width: 42px;
+            height: 0;
+            border-top: 1px solid #505050;
+          }
+        }
+  
+        .title {
+          margin-top: 40px;
+          margin-bottom: 36px;
+          font-size: 40px;
+          line-height: 50px;
+          color: #212121;
+          font-weight: bold;
+          letter-spacing: -0.2px;
+        }
+  
+        .form {
+          .ant-form-item {
+            margin-bottom: 16px !important;
+            .ant-form-item-label {
+              width: 112px;
+              text-align: left;
+              color: #000000;
+              font-weight: bold;
+              display: flex;
+              align-items: center;
+  
+              .ant-form-item-required:before {
+                display: none;
+              }
+  
+              label {
+                font-size: 15px;
+              }
+  
+              label::after {
+                content: '' !important;
+                margin: 0 !important;
+              }
+            }
+  
+            .ant-form-item-control {
+              .ant-form-item-control-input {
+                .ant-input {
+                  background: #FAFAFA;
+                  border: 1px solid #E8E8E8;
+                  border-radius: 3px;
+                  height: 48px;
+                }
+              }
+              .ant-select-selector {
+                background: #FAFAFA;
+                border: 1px solid #E8E8E8;
+                border-radius: 3px;
+                height: 48px;
+                input {
+                  height: 46px;
+                }
+                .ant-select-selection-item {
+                  display: flex;
+                  align-items: center;
+                }
+              }
+            }
+            .ant-btn {
+              width: 100% !important;
+              height: 48px !important;
+              background: #EF0050;
+              border-radius: 5px;
+              border: 0px !important;
+              font-size: 16px !important;
+            }
+            .off-btn {
+              width: 100% !important;
+              height: 48px !important;
+              background: #E8E8E8;
+              color: #BEBEBE;
+              border-radius: 5px;
+              border: 0px !important;
+              font-size: 16px !important;
+              display: flex;
+              justify-content: center;
+              align-items: center;
+            }
+          }
+          .check-box-wrap {
+            margin-top: 24px;
+  
+            .check-box-all {
+              display: flex;
+              align-items: center;
+              justify-content: space-between;
+              margin-bottom: 14px;
+              .drop-img {
+                width: 16px;
+                cursor: pointer;
+                transform: rotate(0deg);
+              }
+            }
+            .check-box-hide {
+              display: none;
+  
+              .check-box-area {
+                display: flex;
+                align-items: center;
+                justify-content: space-between;
+                margin-bottom: 14px;
+              }
+            }
+            label {
+              font-size: 12px;
+              color: #505050;
+              margin: 0;
+            }
+            .deco-text {
+              text-decoration: underline;
+              cursor: pointer;
+            }
+          }
+        }
+      }
+    }
+  
+    .img-wrapper {
+      background-size: cover;
+      background-position: center;
+  
+      &.step1 {
+        width: 1200px;
+          height: 100%;
+          background-image: url("../../img/users/login_1step.png");
+          background-size: cover;
+          background-repeat: no-repeat;
+      }
+    }
+    @include respond-to(mobile) {
+      display: block;
+      grid-template-columns: unset;
+      min-height: unset;
+  
+      .form-wrapper {
+        .content {
+          width: 88.9vw;
+          margin: 0 auto;
+          padding-top: 56px;
+  
+          .logo {
+            display: none;
+          }
+  
+          .page-num {
+            margin: 0 auto;
+            width: 88px;
+          }
+  
+          .title {
+            text-align: center;
+            margin-top: 56px;
+            font-size: 34px;
+            line-height: 42px;
+          }
+  
+          .form {
+            margin-top: 64px;
+            .ant-form-item {
+              .ant-form-item-label {
+                width: 98px;
+                text-align: left;
+                color: #000000;
+                font-weight: bold;
+  
+                .ant-form-item-required:before {
+                  display: none;
+                }
+              }
+            }
+          }
+        }
+      }
+  
+      .img-wrapper {
+        display: none;
+      }
+    }
+  }
+}
+
+  

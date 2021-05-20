@@ -1,0 +1,114 @@
+.question-wrap {
+  box-shadow: 0px 1px 6px #00000029;
+
+  .question, .answer {
+    padding: 24px 32px;
+
+    &.question {
+      border-bottom: 2px solid #E8E8E8;
+    }
+
+    &.answer {
+      padding: 15px 48px 20px;
+
+      &.blank {
+        display: none;
+      }
+    }
+
+    .user-info {
+      display: flex;
+      .profile-img {
+        width: 56px;
+        height: 56px;
+        background-size: contain;
+        background-repeat: no-repeat;
+
+        &.img-0 {
+          background-image: url("../../img/users/profileImage0.svg");
+        }
+      }
+
+      .name-info {
+        margin-left: 16px;
+        .name {
+          margin-top: 5px;
+          font-size: 14px;
+          line-height: 22px;
+          color: #000000;
+          font-weight: 500;
+        }
+
+        .date {
+          margin-top: 4px;
+          font-size: 14px;
+          line-height: 20px;
+          color: #BEBEBE;
+          font-weight: 500;
+        }
+      }
+
+      .count-wrapper {
+        margin-left: auto;
+        display: flex;
+        .like-cnt-wrapper {
+          display: flex;
+          .like-icon {
+            background-image: url("../../img/question/like.svg");
+            background-size: contain;
+            background-repeat: no-repeat;
+            width: 24px;
+            height: 24px;
+            cursor: pointer;
+          }
+        }
+
+        .comment-cnt-wrapper {
+          display: flex;
+          .comment-icon {
+            background-image: url("../../img/question/comment.svg");
+            background-size: contain;
+            background-repeat: no-repeat;
+            width: 20px;
+            height: 20px;
+          }
+        }
+
+        .cnt {
+          font-size: 18px;
+          line-height: 24px;
+          margin: 0 8px;
+          color: #D81858;
+        }
+      }
+    }
+
+    .q-content {
+      margin-top: 8px;
+      font-size: 16px;
+      line-height: 24px;
+      color: #000;
+
+      overflow: hidden;
+      display: -webkit-box;
+      -webkit-line-clamp: 3;
+      -webkit-box-orient: vertical;
+      word-break: break-all;
+    }
+
+    .wait {
+      margin: 0 auto;
+      width: 144px;
+      height: 32px;
+      line-height: 32px;
+      text-align: center;
+      border-radius: 5px;
+      background-color: #D81858;
+
+      font-size: 15px;
+      font-weight: 700;
+      color: #fff;
+    }
+  }
+
+}

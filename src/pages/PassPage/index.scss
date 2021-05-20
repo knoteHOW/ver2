@@ -1,0 +1,87 @@
+@import "../../stylesheets/util";
+
+.course-container {
+  .content {
+    .page-name {
+      border-bottom: 0!important;
+    }
+
+    .page-title {
+      margin-top: 18px;
+      font-size: 30px;
+      text-align: center;
+      font-weight: 900;
+      padding-bottom: 50px;
+      border-bottom: 1px solid #707070;
+    }
+
+    .ant-tabs {
+      margin-top: 40px;
+      .ant-tabs-nav {
+        height: 64px;
+
+        .ant-tabs-tab-btn {
+          font-size: 18px;
+          font-weight: 500;
+        }
+
+        .ant-tabs-tab-active {
+          .ant-tabs-tab-btn {
+            color: #EF0050;
+          }
+        }
+
+        .ant-tabs-ink-bar {
+          background: #EF0050;
+        }
+      }
+
+    }
+  }
+
+  @include respond-to(mobile) {
+    .content {
+      .page-name {
+        display: none;
+      }
+
+      .page-title {
+        display: none;
+      }
+
+      .ant-tabs {
+        margin-top: 20px;
+
+        .ant-tabs-nav {
+          height: 32px;
+          width: 100vw;
+          margin-bottom: 20px;
+          overflow: scroll;
+
+          .ant-tabs-tab:first-of-type {
+            margin-left: 5.5vw;
+          }
+
+          .ant-tabs-tab-btn {
+            font-size: 14px;
+            font-weight: 500;
+            line-height: 20px;
+            padding-bottom: 12px;
+          }
+
+          .ant-tabs-tab-active {
+            .ant-tabs-tab-btn {
+              color: #EF0050;
+            }
+          }
+
+          .ant-tabs-ink-bar {
+            background: #EF0050;
+          }
+        }
+
+      }
+    }
+
+  }
+}

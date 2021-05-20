@@ -1,0 +1,25 @@
+.ql-wrap {
+  padding-bottom: 48px;
+  .header {
+    padding: 16px 20px;
+    p {
+      text-align: center;
+      font-size: 18px;
+      font-weight: 900;
+    }
+    .sort-area {
+      display: flex;
+      justify-content: flex-end;
+    }
+  }
+  .body {
+    .question-wrap {
+      box-shadow: 0px 0px 4px #00000040;
+      border-radius: 5px;
+      padding: 0 20px;
+    }
+    .question-wrap + .question-wrap {
+      margin-top: 20px;
+    }
+  }
+}

@@ -1,0 +1,78 @@
+@import "../../stylesheets/util";
+
+.coursecard-wrap {
+  + .coursecard-wrap {
+    margin-left: 16px;
+  }
+  .coursecard-container {
+    width: 154px;
+    //background-color: #6D6D6D;
+
+    .coursecard-image {
+      width: 154px;
+      height: 110px;
+      background-color: #00ffff;
+      border-radius: 4px;
+      display: flex;
+
+      .coursecard-bookmark {
+        //position: absolute;
+        margin-top: 8px;
+        margin-left: 128px;
+        
+        .coursecard-img {
+          background-image: url("../../img/courses/bookmark.svg");
+          background-size: contain;
+          background-repeat: no-repeat;
+          color: #ffffff;
+          width: 16px;
+          height: 26px;
+        }
+  
+        &.coursecard-active {
+          //border: 2px solid #EF0050;
+          color: #EF0050;
+          .coursecard-img {
+            background-image: url("../../img/courses/selected-bookmark.svg");
+          }
+        }
+      }
+    }    
+
+    .coursecard-text-header{
+      display: flex;
+      align-items: center;
+      margin-top: 8px;
+      
+      .coursecard-text-school{
+        p {
+          font-weight: bold;
+          font-size: 11px;
+          color: #EF0050;
+        }
+      }
+
+      .coursecard-text-subject{
+          p{
+            font-weight: normal;
+            font-size: 11px;
+          }
+      }
+    }
+    .coursecard-text-title{
+        p{
+          font-weight:bold;
+          font-size:16px;
+        }
+    }
+    .coursecard-text-sub{
+        display: flex;
+        align-items: center;
+        p{
+          font-weight:normal;
+          font-size:12px;
+          color: #6D6D6D;
+        }
+    }
+  }
+}

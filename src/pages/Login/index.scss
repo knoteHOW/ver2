@@ -1,0 +1,144 @@
+@import "../../stylesheets/util";
+
+.login-wrap {
+  width: 100%;
+  overflow: hidden;
+  font-family: "Noto Sans Korean", sans-serif;
+  z-index: 10000;
+  position: fixed;
+  background-color: #FFFFFF;
+  .login-container {
+    width: calc(1280px + 60px);
+    display: flex;
+    padding: 0px 30px 0px 30px;
+    margin: 0 auto;
+    position: relative;
+    .btn-wrapper {
+      min-width: 720px;
+      .content {
+        width: 376px;
+        min-height: 100vh;
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+        padding-bottom: 240px;
+        .logo {
+          width: 145px;
+          margin-bottom: 200px;
+          img {
+            width: 100%;
+          }
+        }
+  
+        .page-num {
+          display: flex;
+          align-items: center;
+          .step {
+            width: 24px;
+            height: 24px;
+            border: 1px solid #505050;
+            border-radius: 50%;
+            color: #505050;
+            display: flex;
+            justify-content: center;
+            // align-items: center;
+            line-height: 26px;
+            font-size: 12px;
+          }
+          .step-on {
+            color: #FFFFFF;
+            background-color: #EF0050;
+            border: 0px
+          }
+          .line {
+            width: 42px;
+            height: 0;
+            border-top: 1px solid #505050;
+          }
+        }
+  
+        .title {
+          margin-top: 40px;
+          font-size: 40px;
+          line-height: 50px;
+          color: #212121;
+          font-weight: bold;
+          letter-spacing: -0.2px;
+        }
+  
+        button {
+          margin-top: 140px;
+          width: 100% !important;
+          font-weight: 700;
+          padding-left: 40px !important;
+          position: relative;
+          &::after {
+            content: '';
+            position: absolute;
+            top: 50%;
+            left: 29%;
+            transform: translate(0, -50%);
+            width: 24px;
+            height: 24px;
+            background-image: url('https://knotehow-image.s3.ap-northeast-2.amazonaws.com/1620109982262.png');
+            background-repeat: no-repeat;
+            background-size: cover;
+          }
+        }
+      }
+    }
+  
+    .img-wrapper {
+      background-size: cover;
+      background-position: center;
+  
+      &.step1 {
+        width: 1200px;
+        height: 100%;
+        background-image: url("../../img/users/login_1step.png");
+        background-size: cover;
+        background-repeat: no-repeat;
+      }
+    }
+    @include respond-to(mobile) {
+      display: block;
+      min-height: unset;
+  
+      .btn-wrapper {
+        .content {
+          width: 88.9vw;
+          margin: 0 auto;
+          padding-top: 236px;
+          padding-bottom: 176px;
+  
+          .logo {
+            display: none;
+          }
+  
+          .page-num {
+            width: 88px;
+            margin: 0 auto;
+          }
+  
+          .title {
+            text-align: center;
+            margin-top: 32px;
+            font-size: 34px;
+            line-height: 42px;
+          }
+  
+          button {
+            margin-top: 152px;
+            width: 88.9vw !important;
+          }
+        }
+      }
+  
+      .img-wrapper {
+        display: none;
+      }
+    }
+  }
+}
+
+  

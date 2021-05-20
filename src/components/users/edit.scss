@@ -1,0 +1,94 @@
+@import "../../stylesheets/util";
+
+.user-form {
+  width: 508px;
+  label {
+    width: 135px;
+    text-align: left;
+    font-size: 15px;
+    font-weight: bold;
+    height: 40px;
+    line-height: 40px;
+    margin: 0;
+    &:before, &:after {
+      display: none !important;
+    }
+  }
+
+  .ant-form-item {
+    &.default {
+      width: 471px;
+    }
+  }
+
+  .ant-form-item-control-input {
+    height: 40px;
+    line-height: 40px;
+
+    .ant-input {
+      width: 336px;
+
+      &.inp-confirm {
+        width: 216px;
+      }
+    }
+
+    .confirm {
+      margin-left: 16px;
+      width: 104px;
+    }
+
+    .confirm-ico {
+      width: 17px;
+      height: 17px;
+      margin-left: 20px;
+    }
+  }
+
+  @include respond-to(mobile) {
+    width: 88.9vw;
+
+    label {
+      height: 22px;
+      line-height: 22px;
+      width: 100%;
+    }
+
+    .ant-form-item {
+      &.default {
+        width: 100%;
+      }
+    }
+
+    .ant-form-item-control-input {
+      height: 40px;
+      line-height: 40px;
+
+      .ant-input {
+        width: 100%;
+
+        &.inp-confirm {
+          width: 216px;
+        }
+      }
+
+      .confirm {
+        margin-left: 16px;
+        width: 104px;
+      }
+
+      .confirm-ico {
+        width: 17px;
+        height: 17px;
+        margin-left: 20px;
+      }
+    }
+
+    .ant-btn-primary {
+      width: 100%;
+      height: 48px;
+      background-color: #EF0050;
+      border-color: #EF0050;
+    }
+  }
+}

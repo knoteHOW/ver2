@@ -1,0 +1,551 @@
+diff --git a/node_modules/@wiris/mathtype-ckeditor5/.DS_Store b/node_modules/@wiris/mathtype-ckeditor5/.DS_Store
+new file mode 100644
+index 0000000..e69de29
+diff --git a/node_modules/@wiris/mathtype-ckeditor5/src/commands.js b/node_modules/@wiris/mathtype-ckeditor5/src/commands.js
+index eb421b4..5a35ae3 100644
+--- a/node_modules/@wiris/mathtype-ckeditor5/src/commands.js
++++ b/node_modules/@wiris/mathtype-ckeditor5/src/commands.js
+@@ -16,6 +16,7 @@ export class MathTypeCommand extends Command {
+ 
+         // Check we get a valid integration
+         if ( !options.hasOwnProperty( 'integration' ) || !( options.integration instanceof CKEditor5Integration ) ) {
++
+             throw 'Must pass a valid CKEditor5Integration instance as attribute "integration" of options';
+         }
+ 
+@@ -45,23 +46,29 @@ export class MathTypeCommand extends Command {
+     openEditor() {
+         const image = this._getSelectedImage();
+         if ( typeof image !== 'undefined' && image !== null && image.classList.contains( WirisPlugin.Configuration.get( 'imageClassName' ) ) ) {
++
+             this.integration.core.editionProperties.temporalImage = image;
+             this.integration.openExistingFormulaEditor();
+         } else {
++
+             this.integration.openNewFormulaEditor();
+         }
+     }
+ 
++    initEditor() {
++        this.integration.setNewFormulaEditor();
++    }
++
+     /**
+      * Gets the currently selected formula image
+      * @returns {Element} selected image, if any, undefined otherwise
+      */
+     _getSelectedImage() {
+-
+         const selection = this.editor.editing.view.document.selection;
+ 
+         // If we can not extract the formula, fall back to default behavior.
+         if ( selection.isCollapsed || selection.rangeCount !== 1 ) {
++
+             return;
+         }
+ 
+@@ -72,6 +79,7 @@ export class MathTypeCommand extends Command {
+         let image;
+ 
+         for ( const span of range ) {
++
+             if ( span.item.name !== 'span' ) {
+                 return;
+             }
+diff --git a/node_modules/@wiris/mathtype-ckeditor5/src/integration.js b/node_modules/@wiris/mathtype-ckeditor5/src/integration.js
+index f962f9e..d73aada 100644
+--- a/node_modules/@wiris/mathtype-ckeditor5/src/integration.js
++++ b/node_modules/@wiris/mathtype-ckeditor5/src/integration.js
+@@ -3,6 +3,7 @@ import Position from '@ckeditor/ckeditor5-engine/src/model/position';
+ import IntegrationModel, { integrationModelProperties } from '@wiris/mathtype-html-integration-devkit/src/integrationmodel';
+ import Util from '@wiris/mathtype-html-integration-devkit/src/util';
+ import Configuration from '@wiris/mathtype-html-integration-devkit/src/configuration';
++import Parser from '@wiris/mathtype-html-integration-devkit/src/parser.js';
+ import Latex from '@wiris/mathtype-html-integration-devkit/src/latex';
+ 
+ /**
+@@ -13,8 +14,8 @@ export default class CKEditor5Integration extends IntegrationModel {
+ 
+     constructor( ckeditorIntegrationModelProperties ) {
+         const editor = ckeditorIntegrationModelProperties.editorObject;
+-
+         if ( typeof editor.config != 'undefined' && typeof editor.config.get('mathTypeParameters') != 'undefined') {
++
+             ckeditorIntegrationModelProperties.integrationParameters = editor.config.get('mathTypeParameters');
+         }
+         /**
+@@ -39,10 +40,12 @@ export default class CKEditor5Integration extends IntegrationModel {
+     getLanguage() {
+         // Returns the CKEDitor instance language taking into account that the language can be an object.
+         try {
++
+             return this.editorParameters.language;
+         } catch (e) {}
+         const languageObject = this.editorObject.config.get( 'language' );
+         if (languageObject != null) {
++
+             if (typeof (languageObject) === 'object') {
+                 // eslint-disable-next-line no-prototype-builtins
+                 if (languageObject.hasOwnProperty('ui')) {
+@@ -51,6 +54,7 @@ export default class CKEditor5Integration extends IntegrationModel {
+             } 
+             return languageObject;
+         } else {
++
+             return super.getLanguage();
+         }
+     }
+@@ -71,6 +75,7 @@ export default class CKEditor5Integration extends IntegrationModel {
+         if ( typeof editor.config.wirislistenersdisabled == 'undefined' ||
+             !editor.config.wirislistenersdisabled ) {
+ 
++
+             this.checkElement();
+ 
+         }
+@@ -82,7 +87,6 @@ export default class CKEditor5Integration extends IntegrationModel {
+      * so we must assign the events again to editor element.
+      */
+     checkElement() {
+-
+         const editor = this.editorObject;
+         const newElement = editor.sourceElement;
+ 
+@@ -101,22 +105,25 @@ export default class CKEditor5Integration extends IntegrationModel {
+      * @param {MouseEvent} event - event which trigger the handler.
+      */
+     doubleClickHandler(element, event) {
+-        if (element.nodeName.toLowerCase() == 'img') {
+-            if (Util.containsClass(element, Configuration.get('imageClassName'))) {
+-                // Some plugins (image2, image) open a dialog on double click. On formulas
+-                // doubleclick event ends here.
+-                if (typeof event.stopPropagation != 'undefined') { // old I.E compatibility.
+-                    event.stopPropagation();
+-                } else {
+-                    event.returnValue = false;
+-                }
+-                this.core.getCustomEditors().disable();
+-                const customEditorAttr = element.getAttribute(Configuration.get('imageCustomEditorName'));
+-                if (customEditorAttr) {
+-                    this.core.getCustomEditors().enable(customEditorAttr);
++        const editor = this.editorObject;
++        if (!editor.isReadOnly) {
++            if (element.nodeName.toLowerCase() == 'img') {
++                if (Util.containsClass(element, Configuration.get('imageClassName'))) {
++                    // Some plugins (image2, image) open a dialog on double click. On formulas
++                    // doubleclick event ends here.
++                    if (typeof event.stopPropagation != 'undefined') { // old I.E compatibility.
++                        event.stopPropagation();
++                    } else {
++                        event.returnValue = false;
++                    }
++                    this.core.getCustomEditors().disable();
++                    const customEditorAttr = element.getAttribute(Configuration.get('imageCustomEditorName'));
++                    if (customEditorAttr) {
++                        this.core.getCustomEditors().enable(customEditorAttr);
++                    }
++                    this.core.editionProperties.temporalImage = element;
++                    this.openExistingFormulaEditor();
+                 }
+-                this.core.editionProperties.temporalImage = element;
+-                this.openExistingFormulaEditor();
+             }
+         }
+     }
+@@ -134,7 +141,6 @@ export default class CKEditor5Integration extends IntegrationModel {
+     }
+ 
+     openNewFormulaEditor() {
+-
+         // Store the editor selection as it will be lost upon opening the modal
+         this.core.editionProperties.selection = this.editorObject.editing.view.document.selection;
+ 
+@@ -142,6 +148,13 @@ export default class CKEditor5Integration extends IntegrationModel {
+ 
+     }
+ 
++    setNewFormulaEditor() {
++        // Store the editor selection as it will be lost upon opening the modal
++        this.core.editionProperties.selection = this.editorObject.editing.view.document.selection;
++
++        return super.closeNewFormulaEditor();    
++    }
++
+     /**
+      * Replaces old formula with new MathML or inserts it in caret position if new
+      * @param {String} mathml MathML to update old one or insert
+@@ -152,15 +165,13 @@ export default class CKEditor5Integration extends IntegrationModel {
+         return this.editorObject.model.change( writer => {
+ 
+             const core = this.getCore();
+-
+-            const modelElementNew = writer.createElement( 'mathml', { formula: mathml } );
++            const imgHtml = Parser.initParse( mathml, '' );
++            const modelElementNew = writer.createElement( 'mathml', { formula: mathml, imgTag: imgHtml} );
+ 
+             // Obtain the DOM <span><img ... /></span> object corresponding to the formula
+             if ( core.editionProperties.isNewElement ) {
+-
+                 // Don't bother inserting anything at all if the MathML is empty.
+                 if ( !mathml ) return;
+-
+                 let viewSelection = this.core.editionProperties.selection || this.editorObject.editing.view.document.selection;
+                 let modelPosition = this.editorObject.editing.mapper.toModelPosition( viewSelection.getLastPosition() );
+ 
+@@ -168,7 +179,6 @@ export default class CKEditor5Integration extends IntegrationModel {
+ 
+                 // Remove selection
+                 if ( !viewSelection.isCollapsed ) {
+-
+                     for ( const range of viewSelection.getRanges() ) {
+                         writer.remove( this.editorObject.editing.mapper.toModelRange( range ) );
+                     }
+@@ -176,7 +186,6 @@ export default class CKEditor5Integration extends IntegrationModel {
+                 }
+ 
+             } else {
+-
+                 const img = core.editionProperties.temporalImage;
+                 const viewElement = this.editorObject.editing.view.domConverter.domToView( img ).parent;
+                 const modelElementOld = this.editorObject.editing.mapper.toModelElement( viewElement );
+@@ -203,7 +212,6 @@ export default class CKEditor5Integration extends IntegrationModel {
+      * @returns {module:engine/model/text~Text|undefined} Text node corresponding to the given element or undefined if it doesn't exist.
+      */
+     findText( viewElement ) {
+-
+         // mapper always converts text nodes to *new* model elements so we need to convert the text's parents and then come back down
+         let pivot = viewElement;
+         let element;
+@@ -229,14 +237,12 @@ export default class CKEditor5Integration extends IntegrationModel {
+     }
+ 
+     /** @inheritdoc */
+-    insertFormula( focusElement, windowTarget, mathml, wirisProperties ) {
+-
++    insertFormula( focusElement, windowTarget, mathml, wirisProperties ) {;
+         let returnObject = {};
+ 
+         if ( !mathml ) {
+             this.insertMathml( '' );
+         } else if ( this.core.editMode == 'latex' ) {
+-
+             returnObject.latex = Latex.getLatexFromMathML( mathml );
+             returnObject.node = windowTarget.document.createTextNode( '$$' + returnObject.latex + '$$' );
+ 
+diff --git a/node_modules/@wiris/mathtype-ckeditor5/src/plugin.js b/node_modules/@wiris/mathtype-ckeditor5/src/plugin.js
+index 7a9f769..a500d29 100644
+--- a/node_modules/@wiris/mathtype-ckeditor5/src/plugin.js
++++ b/node_modules/@wiris/mathtype-ckeditor5/src/plugin.js
+@@ -9,6 +9,8 @@ import XmlDataProcessor from '@ckeditor/ckeditor5-engine/src/dataprocessor/xmlda
+ import UpcastWriter from '@ckeditor/ckeditor5-engine/src/view/upcastwriter'
+ import { toWidget, viewToModelPositionOutsideModelElement } from '@ckeditor/ckeditor5-widget/src/utils';
+ import Widget from '@ckeditor/ckeditor5-widget/src/widget';
++import Command from '@ckeditor/ckeditor5-core/src/command';
++
+ 
+ // MathType API imports
+ import { integrationModelProperties } from '@wiris/mathtype-html-integration-devkit/src/integrationmodel';
+@@ -26,8 +28,8 @@ import Latex from '@wiris/mathtype-html-integration-devkit/src/latex';
+ import { MathTypeCommand, ChemTypeCommand } from './commands';
+ import CKEditor5Integration from './integration';
+ 
+-import mathIcon from '../theme/icons/formula.svg';
+-import chemIcon from '../theme/icons/chem.svg';
++import mathIcon from '../theme/icons/my_math.svg';
++import chemIcon from '../theme/icons/my_math.svg';
+ 
+ export var currentInstance = null;
+ 
+@@ -42,7 +44,6 @@ export default class MathType extends Plugin {
+     }
+ 
+     init() {
+-
+         // Create the MathType API Integration object
+         const integration = this._addIntegration();
+         currentInstance = integration
+@@ -62,12 +63,67 @@ export default class MathType extends Plugin {
+         // Expose the WirisPlugin variable to the window
+         this._exposeWiris();
+ 
++
++
++        this.setEditor( integration );
++        this.initEditor( integration );
+     }
+ 
+     /**
+      * Create the MathType API Integration object
+      * @returns {CKEditor5Integration} the integration object
+      */
++
++    setEditor( integration ) {
++        // It's possible that a custom editor was last used.
++        // We need to disable it to avoid wrong behaviors.
++        integration.core.getCustomEditors().disable();
++    }
++
++    openEditor( integration ) {
++        const image = this._getSelectedImage();
++        if ( typeof image !== 'undefined' && image !== null && image.classList.contains( WirisPlugin.Configuration.get( 'imageClassName' ) ) ) {
++            integration.core.editionProperties.temporalImage = image;
++            integration.openExistingFormulaEditor();
++        } else {
++            integration.setNewFormulaEditor();
++        }
++    }
++
++    initEditor( integration ) {
++        integration.setNewFormulaEditor();
++    }
++
++    _getSelectedImage() {
++        const selection = this.editor.editing.view.document.selection;
++
++        // If we can not extract the formula, fall back to default behavior.
++        if ( selection.isCollapsed || selection.rangeCount !== 1 ) {
++            return;
++        }
++
++        // Look for the <span> wrapping the formula and then for the <img/> inside
++
++        const range = selection.getFirstRange();
++
++        let image;
++
++        for ( const span of range ) {
++            if ( span.item.name !== 'span' ) {
++                return;
++            }
++            image = span.item.getChild( 0 );
++            break;
++        }
++
++        if ( !image ) {
++            return;
++        }
++
++        return this.editor.editing.view.domConverter.mapViewToDom( image );
++
++    }
++
+     _addIntegration() {
+ 
+         const editor = this.editor;
+@@ -88,7 +144,6 @@ export default class MathType extends Plugin {
+         integrationProperties.scriptName = 'bundle.js';
+         integrationProperties.managesLanguage = true;
+         // etc
+-
+         // There are platforms like Drupal that initialize CKEditor but they hide or remove the container element.
+         // To avoid a wrong behaviour, this integration only starts if the workspace container exists.
+         let integration;
+@@ -118,7 +173,6 @@ export default class MathType extends Plugin {
+      * Add the MathType and ChemType commands to the editor
+      */
+     _addCommands() {
+-
+         const editor = this.editor;
+ 
+         // Add command to open the formula editor
+@@ -134,7 +188,6 @@ export default class MathType extends Plugin {
+      * @param {CKEditor5Integration} integration the integration object
+      */
+     _addViews( integration ) {
+-
+         const editor = this.editor;
+ 
+         // Add button for the formula editor
+@@ -145,7 +198,7 @@ export default class MathType extends Plugin {
+             view.bind( 'isEnabled' ).to( editor.commands.get( 'MathType' ), 'isEnabled' );
+ 
+             view.set( {
+-                label: 'Insert a math equation - MathType',
++                label: '수식',
+                 icon: mathIcon,
+                 tooltip: true
+             } );
+@@ -185,7 +238,6 @@ export default class MathType extends Plugin {
+ 
+         // Observer for the double click event
+         editor.editing.view.addObserver( ClickObserver );
+-
+     }
+ 
+     /**
+@@ -199,16 +251,50 @@ export default class MathType extends Plugin {
+             allowWhere: '$text',
+             isObject: true,
+             isInline: true,
+-            allowAttributes: [ 'formula' ]
++            allowAttributes: [ 'formula', 'imageData' ]
+         } );
+ 
++        schema.addChildCheck( ( ctx, childDef ) => {
++			if ( ctx.endsWith( 'mathml' ) && childDef.name == 'plain' ) {
++				return false;
++			}
++			else if ( ctx.endsWith( 'mathml' ) && childDef.name == 'blockQuote' ) {
++				return false;
++			}
++			else if ( ctx.endsWith( 'mathml' ) && childDef.name == 'image' ) {
++				return false;
++			}
++			else if ( ctx.endsWith( 'mathml' ) && childDef.name == 'table' ) {
++				return false;
++			}
++			else if ( ctx.endsWith( 'mathml' ) && childDef.name == 'listItem' ) {
++				return false;
++			}
++			else if ( ctx.endsWith( 'mathml' ) && childDef.name == 'mathml' ) {
++				return false;
++			}
++			else if ( ctx.endsWith( 'mathml' ) && childDef.name == 'codeBlock' ) {
++				return false;
++			}
++			else if ( ctx.endsWith( 'mathml' ) && childDef.name == 'link' ) {
++				return false;
++			}
++			else if ( ctx.endsWith( 'mathml' ) && childDef.name == 'horizontalLine' ) {
++				return false;
++			}
++			else if ( ctx.endsWith( 'mathml' ) && childDef.name == 'heading1' ) {
++				return false;
++			}
++			else if ( ctx.endsWith( 'mathml' ) && childDef.name == 'heading2' ) {
++				return false;
++			}
++        } );
+     }
+ 
+     /**
+      * Add the downcast and upcast converters
+      */
+     _addConverters() {
+-
+         const editor = this.editor;
+ 
+         // Editing view -> Model
+@@ -219,8 +305,25 @@ export default class MathType extends Plugin {
+             },
+             model: ( viewElement, { writer: modelWriter } ) => {
+                 const formula = MathML.safeXmlDecode( viewElement.getChild( 0 ).getAttribute( 'data-mathml' ) );
++                const align = viewElement._children[0]._attrs.get("align");
++                const src = viewElement._children[0]._attrs.get("src");
++                const dataMathml = viewElement._children[0]._attrs.get("data-mathml");
++                const width = viewElement._children[0]._attrs.get("width");
++                const height = viewElement._children[0]._attrs.get("height");
++                const alt = viewElement._children[0]._attrs.get("alt");
++                const role = viewElement._children[0]._attrs.get("role");
++                const imageData = {
++                    align,
++                    src,
++                    dataMathml,
++                    width,
++                    height,
++                    alt,
++                    role
++                }
+                 return modelWriter.createElement( 'mathml', {
+                     formula: formula,
++                    imageData: imageData,
+                 } );
+             }
+         } );
+@@ -340,7 +443,6 @@ export default class MathType extends Plugin {
+             if ( sourceNode.is( 'text' ) ) {
+                 return viewWriter.createText( sourceNode.data );
+             } else if ( sourceNode.is( 'element' ) ) {
+-
+                 if ( sourceNode.is( 'emptyElement' ) ) {
+                     return viewWriter.createEmptyElement( sourceNode.name, sourceNode.getAttributes() );
+                 } else {
+@@ -358,10 +460,16 @@ export default class MathType extends Plugin {
+         }
+ 
+         function createDataString( modelItem, { writer: viewWriter } ) {
+-
+             const htmlDataProcessor = new HtmlDataProcessor( viewWriter.document );
+-
+-            let mathString = Parser.endParseSaveMode( modelItem.getAttribute( 'formula' ) );
++            let mathString;
++            if(modelItem.getAttribute( 'imgTag' )) {
++                mathString = `<span class="ck-math-widget ck-widget" contenteditable="false">` + modelItem.getAttribute( 'imgTag' ) + `<span/>`;
++            } else if (modelItem.getAttribute( 'imageData' )) {
++                const data = modelItem.getAttribute( 'imageData' )
++                mathString = `<span class="ck-math-widget ck-widget" contenteditable="false">` + `<img align="${data.align}" class="Wirisformula" src="${data.src}" data-mathml="${data.dataMathml}" width="${data.width}" height="${data.height}" alt="${data.alt}" role="${data.role}" style="max-width: none; vertical-align: -4px;">` + `<span/>`;
++            } else {
++                mathString = Parser.endParseSaveMode( modelItem.getAttribute( 'formula' ) );
++            }
+ 
+             // Remove the traces from Hand. This code should be removed once PLUGINS-1307 is solved.
+             if ( !Configuration.get( 'saveHandTraces' ) ) {
+@@ -387,11 +495,16 @@ export default class MathType extends Plugin {
+         }
+ 
+         function createViewImage( modelItem, { writer: viewWriter } ) {
+-
+             const htmlDataProcessor = new HtmlDataProcessor( viewWriter.document );
+ 
+             const mathString = modelItem.getAttribute( 'formula' );
+-            const imgHtml = Parser.initParse( mathString, editor.config.get( 'language' ) );
++            const imageData = modelItem.getAttribute( 'imageData' );
++            let imgHtml;
++            if (imageData) {
++                imgHtml = `<IMG align="${imageData.align}" class="Wirisformula" src="${imageData.src}" data-mathml="${imageData.dataMathml}" width="${imageData.width}" height="${imageData.height}" alt="${imageData.alt}" role="${imageData.role}" style="max-width: none; vertical-align: -4px;"/>`
++            } else {
++                imgHtml = Parser.initParse( mathString, editor.config.get( 'language' ) );
++            }
+             const imgElement = htmlDataProcessor.toView( imgHtml ).getChild( 0 );
+ 
+             /* Although we use the HtmlDataProcessor to obtain the attributes,
+@@ -413,7 +526,6 @@ export default class MathType extends Plugin {
+      * Expose the WirisPlugin variable to the window
+      */
+     _exposeWiris() {
+-
+         window.WirisPlugin = {
+             Core: Core,
+             Parser: Parser,
+diff --git a/node_modules/@wiris/mathtype-ckeditor5/theme/icons/chemical.svg b/node_modules/@wiris/mathtype-ckeditor5/theme/icons/chemical.svg
+new file mode 100644
+index 0000000..0c083c5
+--- /dev/null
++++ b/node_modules/@wiris/mathtype-ckeditor5/theme/icons/chemical.svg
+@@ -0,0 +1 @@
++<svg height="511pt" viewBox="-17 0 511 511.99936" width="511pt" xmlns="http://www.w3.org/2000/svg"><path d="m315.753906 362.453125-50.84375-88.070313 50.84375-88.066406h101.695313l50.847656 88.066406-50.847656 88.070313zm0 0" fill="#f6838d"/><path d="m315.757812 186.316406-50.847656-88.070312 50.847656-88.070313h101.695313l50.847656 88.070313-50.847656 88.070312zm0 0" fill="#ffd89e"/><path d="m163.214844 274.382812-50.84375-88.070312 50.84375-88.066406h101.695312l50.847656 88.066406-50.847656 88.070312zm0 0" fill="#9bc6ff"/><path d="m61.523438 450.523438-50.847657-88.070313 50.847657-88.070313h101.691406l50.847656 88.070313-50.847656 88.070313zm0 0" fill="#ffc15a"/><path d="m429.199219 186.316406 47.914062-82.984375c1.816407-3.148437 1.816407-7.027343 0-10.175781l-50.847656-88.070312c-1.820313-3.148438-5.175781-5.085938-8.8125-5.085938h-101.695313c-3.636718 0-6.992187 1.9375-8.8125 5.085938l-47.90625 82.984374h-90.050781l-27.640625-46.398437c-6.6875-11.226563-24.179687-.824219-17.484375 10.414063l27.550781 46.25-44.921874 77.800781h-53.917969c-13.066407 0-13.085938 20.351562 0 20.351562h53.917969l39.101562 67.71875h-84.070312c-3.636719 0-6.996094 1.941407-8.8125 5.089844l-50.847657 88.070313c-1.816406 3.148437-1.816406 7.027343 0 10.175781l47.867188 82.90625-27.566407 46.269531c-6.667968 11.199219 10.734376 21.746094 17.484376 10.417969l27.664062-46.441407h90.097656l27.660156 46.433594c6.746094 11.332032 24.152344.78125 17.484376-10.414062l-27.554688-46.253906 47.875-82.917969c1.816406-3.148438 1.816406-7.027344 0-10.175781l-42.035156-72.808594h78.191406l44.921875 77.808594-27.554687 46.257812c-6.671876 11.195312 10.730468 21.746094 17.480468 10.414062l27.652344-46.410156h90.320312l27.449219 46.386719c6.71875 11.351563 24.148438.847656 17.515625-10.363281l-27.480468-46.4375 47.773437-82.742188c1.816406-3.148437 1.816406-7.027344 0-10.175781zm-107.566407-165.964844h89.945313l44.972656 77.894532-44.972656 77.894531h-89.945313l-44.972656-77.894531zm-152.542968 88.070313h89.945312l44.972656 77.890625-44.972656 77.894531h-89.941406l-44.976562-77.890625zm-11.75 331.925781h-89.941406l-44.972657-77.894531 44.972657-77.894531h89.941406l44.972656 77.894531zm260.101562-98.230468-22.605468-38.191407c-6.652344-11.246093-24.175782-.898437-17.511719 10.363281l22.480469 37.988282h-78.175782l-44.972656-77.890625 44.972656-77.898438h89.945313l44.972656 77.894531zm0 0"/><path d="m366.605469 264.207031c-5.53125 0-10.175781 4.640625-10.175781 10.175781.003906 5.527344 4.648437 10.175782 10.175781 10.175782 5.371093 0 9.917969-4.378906 10.15625-9.730469.253906-5.695313-4.445313-10.621094-10.15625-10.621094zm0 0"/><path d="m11.714844 196.488281c5.527344 0 10.175781-4.648437 10.175781-10.175781s-4.648437-10.175781-10.175781-10.175781c-5.371094 0-9.917969 4.375-10.15625 9.730469-.25 5.691406 4.449218 10.621093 10.15625 10.621093zm0 0"/><path d="m39.875 136.683594c4.464844 2.589844 14.046875 1.5625 14.046875-5.195313v-21.410156h13.074219v21.410156c0 8.835938 17.1875 8.800781 17.1875 0v-55.40625c0-8.761719-17.1875-8.761719-17.1875 0v19.195313h-13.074219v-19.195313c0-8.761719-17.1875-8.761719-17.1875 0v55.40625c0 2.816407 3.847656 5.605469 3.140625 5.195313 1.542969.898437-2.023438-1.167969 0 0 4.460938 2.589844-2.023438-1.167969 0 0zm0 0"/><path d="m384.273438 399.703125c-8.644532-7.429687-24.472657-7.464844-33.097657.007813-4.289062 3.714843-6.464843 9.480468-6.464843 17.136718v23.78125c0 7.660156 2.175781 13.425782 6.464843 17.140625 8.628907 7.472657 24.460938 7.433594 33.097657.007813 4.324218-3.714844 6.519531-9.484375 6.519531-17.148438v-23.78125c0-7.660156-2.195313-13.429687-6.519531-17.144531-4.1875-3.601563 4.324218 3.714844 0 0zm-22.378907 17.144531c0-8.964844 11.710938-8.945312 11.710938 0v23.78125c0 8.945313-11.710938 8.964844-11.710938 0zm0 0"/><path d="m197.894531 66.976562c8.667969 7.578126 23.984375 7.378907 32.828125.199219 4.511719-3.664062 6.796875-8.589843 6.796875-14.644531 0-10.039062-16.472656-11.890625-17.183593-2.105469-.410157 8.625-11.710938 8.082031-11.710938-.535156v-23.78125c0-8.164063 11.070312-9.257813 11.710938-1.199219.363281 9.691406 17.183593 8.011719 17.183593-2.125 0-5.851562-2.300781-10.621094-6.839843-14.171875-8.921876-6.96875-24.085938-7.101562-32.734376.398438-4.316406 3.746093-6.507812 9.496093-6.507812 17.097656v23.78125c0 7.59375 2.171875 13.34375 6.457031 17.085937"/></svg>
+\ No newline at end of file
+diff --git a/node_modules/@wiris/mathtype-ckeditor5/theme/icons/math.svg b/node_modules/@wiris/mathtype-ckeditor5/theme/icons/math.svg
+new file mode 100644
+index 0000000..31aa8cd
+--- /dev/null
++++ b/node_modules/@wiris/mathtype-ckeditor5/theme/icons/math.svg
+@@ -0,0 +1 @@
++<svg id="Capa_1" enable-background="new 0 0 512 512" height="512" viewBox="0 0 512 512" width="512" xmlns="http://www.w3.org/2000/svg"><g><g fill="#020288"><path d="m239.388 105.008h91.995c5.523 0 10-4.477 10-10s-4.477-10-10-10h-91.995c-5.523 0-10 4.477-10 10s4.477 10 10 10z"/><path d="m273.612 346.81c5.523 0 10-4.477 10-10s-4.477-10-10-10h-91.995c-5.523 0-10 4.477-10 10s4.477 10 10 10z"/><path d="m490.17 417.812v-382.481c0-5.523-4.477-10-10-10h-40.83c-5.523 0-10 4.477-10 10v49.677h-67.66c-5.523 0-10 4.477-10 10s4.477 10 10 10h67.66v100.901h-72.064c-2.987 0-5.668 1.31-7.5 3.386-1.832-2.076-4.513-3.386-7.5-3.386h-82.723c-2.558 0-4.891.961-6.66 2.541-1.768-1.58-4.102-2.541-6.66-2.541h-64.617c-5.523 0-10 4.477-10 10s4.477 10 10 10h64.617c2.558 0 4.891-.961 6.66-2.541 1.768 1.58 4.102 2.541 6.66 2.541h82.723c2.987 0 5.668-1.31 7.5-3.386 1.832 2.076 4.513 3.386 7.5 3.386h72.064v100.901h-72.064c-5.523 0-10 4.477-10 10s4.477 10 10 10h72.064v70.756h-346.68v-70.756h68.66c5.523 0 10-4.477 10-10s-4.477-10-10-10h-68.66v-100.901h68.66c5.523 0 10-4.477 10-10s-4.477-10-10-10h-68.66v-100.901h73.064c5.523 0 10-4.477 10-10s-4.477-10-10-10h-73.064v-49.677c0-5.523-4.477-10-10-10h-40.83c-5.523 0-10 4.477-10 10v382.481c-12.319 1.723-21.83 12.329-21.83 25.115v33.742c0 5.523 4.477 10 10 10h492c5.523 0 10-4.477 10-10v-33.742c0-12.786-9.511-23.392-21.83-25.115zm-40.83-372.481h20.83v372.236h-20.83zm-407.51 0h20.83v372.236h-20.83zm450.17 421.338h-472v-23.742c0-2.956 2.405-5.361 5.361-5.361h461.278c2.956 0 5.361 2.405 5.361 5.361z"/></g><g><g><g><path d="m164.66 135.604c-15.017 0-27.192-12.174-27.192-27.191v-26.809c0-15.017 12.174-27.191 27.191-27.191 15.017 0 27.191 12.174 27.191 27.191v26.809c.001 15.017-12.173 27.191-27.19 27.191z" fill="#e2c4ff"/></g><g><path d="m219.043 135.604c-15.017 0-27.192-12.174-27.192-27.191v-26.809c0-15.017 12.174-27.191 27.191-27.191 15.017 0 27.191 12.174 27.191 27.191v26.809c.001 15.017-12.173 27.191-27.19 27.191z" fill="#e2c4ff"/></g><g><path d="m348.5 135.604c-15.017 0-27.191-12.174-27.191-27.191v-26.809c0-15.017 12.174-27.191 27.191-27.191 15.017 0 27.191 12.174 27.191 27.191v26.809c0 15.017-12.174 27.191-27.191 27.191z" fill="#e2c4ff"/></g></g><g><g><path d="m164.66 256.505c-15.017 0-27.192-12.174-27.192-27.191v-26.809c0-15.017 12.174-27.191 27.191-27.191 15.017 0 27.191 12.174 27.191 27.191v26.809c.001 15.017-12.173 27.191-27.19 27.191z" fill="#e2c4ff"/></g><g><path d="m256.58 256.505c-15.017 0-27.191-12.174-27.191-27.191v-26.809c0-15.017 12.174-27.191 27.191-27.191 15.017 0 27.191 12.174 27.191 27.191v26.809c0 15.017-12.174 27.191-27.191 27.191z" fill="#e2c4ff"/></g><g><path d="m348.5 256.505c-15.017 0-27.191-12.174-27.191-27.191v-26.809c0-15.017 12.174-27.191 27.191-27.191 15.017 0 27.191 12.174 27.191 27.191v26.809c0 15.017-12.174 27.191-27.191 27.191z" fill="#e2c4ff"/></g></g><g><g><path d="m348.5 296.214c15.017 0 27.191 12.174 27.191 27.191v26.809c0 15.017-12.174 27.191-27.191 27.191-15.017 0-27.191-12.174-27.191-27.191v-26.809c-.001-15.017 12.173-27.191 27.191-27.191z" fill="#e2c4ff"/></g><g><path d="m294.117 296.214c15.017 0 27.192 12.174 27.192 27.191v26.809c0 15.017-12.174 27.191-27.191 27.191-15.017 0-27.191-12.174-27.191-27.191v-26.809c-.002-15.017 12.172-27.191 27.19-27.191z" fill="#e2c4ff"/></g><g><path d="m164.66 296.214c15.017 0 27.192 12.174 27.192 27.191v26.809c0 15.017-12.174 27.191-27.191 27.191-15.017 0-27.191-12.174-27.191-27.191v-26.809c-.002-15.017 12.172-27.191 27.19-27.191z" fill="#e2c4ff"/></g></g></g></g></svg>
+\ No newline at end of file
+diff --git a/node_modules/@wiris/mathtype-ckeditor5/theme/icons/my_math.svg b/node_modules/@wiris/mathtype-ckeditor5/theme/icons/my_math.svg
+new file mode 100644
+index 0000000..295e91c
+--- /dev/null
++++ b/node_modules/@wiris/mathtype-ckeditor5/theme/icons/my_math.svg
+@@ -0,0 +1,19 @@
++<svg class='my-math-svg' xmlns="http://www.w3.org/2000/svg" width="25.031" height="16" viewBox="0 0 25.031 16">
++  <defs>
++    <style>
++      .math-a {
++        fill: #505050;
++      }
++    </style>
++  </defs>
++  <g transform="translate(-485.617 -256.849)">
++    <path class="math-a"
++      d="M490.308,258.468a3.76,3.76,0,0,1,1.161.171.968.968,0,0,1,.5.358.825.825,0,0,1,.077.648,1.123,1.123,0,0,1-.29.589.632.632,0,0,1-.58.128c-.136-.023-.254-.04-.35-.051a2.784,2.784,0,0,0-.315-.018,1.1,1.1,0,0,0-.862.3,1.285,1.285,0,0,0-.265.879v.6h1.741a.64.64,0,0,1,.571.264,1.168,1.168,0,0,1,0,1.246.64.64,0,0,1-.571.264h-1.741v6.484a.768.768,0,0,1-.324.682,1.3,1.3,0,0,1-.751.222,1.31,1.31,0,0,1-.742-.222.76.76,0,0,1-.332-.682v-6.484h-.871a.64.64,0,0,1-.571-.264,1.174,1.174,0,0,1,0-1.246.64.64,0,0,1,.571-.264h.871v-.648a2.974,2.974,0,0,1,.759-2.184A3.122,3.122,0,0,1,490.308,258.468Z" />
++    <path class="math-a"
++      d="M496.526,256.966a.773.773,0,0,1,.41.478.848.848,0,0,1-.1.649,12.686,12.686,0,0,0-1.586,6.432v.648a12.686,12.686,0,0,0,1.586,6.432.848.848,0,0,1,.1.649.771.771,0,0,1-.41.477.925.925,0,0,1-.657.094,1.1,1.1,0,0,1-.6-.418,10.558,10.558,0,0,1-1.656-3.293,13.732,13.732,0,0,1-.562-4.026v-.478a13.744,13.744,0,0,1,.562-4.027,10.552,10.552,0,0,1,1.656-3.292,1.1,1.1,0,0,1,.6-.418A.929.929,0,0,1,496.526,256.966Z" />
++    <path class="math-a"
++      d="M507.168,256.966a.929.929,0,0,1,.657-.093,1.1,1.1,0,0,1,.6.418,10.529,10.529,0,0,1,1.655,3.292,13.71,13.71,0,0,1,.563,4.027v.478a13.7,13.7,0,0,1-.563,4.026,10.534,10.534,0,0,1-1.655,3.293,1.1,1.1,0,0,1-.6.418.925.925,0,0,1-.657-.094.768.768,0,0,1-.41-.477.848.848,0,0,1,.1-.649,12.686,12.686,0,0,0,1.586-6.432v-.648a12.686,12.686,0,0,0-1.586-6.432.848.848,0,0,1-.1-.649A.77.77,0,0,1,507.168,256.966Z" />
++    <path class="math-a"
++      d="M501.332,260.662q.652,0,1.046,1.455l.28.988.709-1.25a2.148,2.148,0,0,1,1.772-1.194,2.518,2.518,0,0,1,1.324.336,1.05,1.05,0,0,1,.13.54,1.159,1.159,0,0,1-.252.746.881.881,0,0,1-.736.317,1.223,1.223,0,0,1-.625-.168,1.018,1.018,0,0,0-.476-.168.626.626,0,0,0-.579.317l-.914,1.772.728,2.593q.168.522.448.522a1.391,1.391,0,0,0,.737-.392,3.966,3.966,0,0,0,.625-.6c.037,0,.1.063.2.191a.567.567,0,0,1,.15.261,4.166,4.166,0,0,1-1.332,1.352,3.441,3.441,0,0,1-1.912.849q-.635,0-1.047-1.474l-.354-1.268-.932,1.567a2.179,2.179,0,0,1-1.772,1.194,2.518,2.518,0,0,1-1.324-.336,1.05,1.05,0,0,1-.13-.54,1.159,1.159,0,0,1,.252-.746.885.885,0,0,1,.736-.317,1.223,1.223,0,0,1,.625.168,1.018,1.018,0,0,0,.476.168.627.627,0,0,0,.579-.317l1.157-2.052-.672-2.332q-.168-.523-.448-.523a1.388,1.388,0,0,0-.737.392,4.013,4.013,0,0,0-.625.6c-.025,0-.091-.064-.2-.191a.561.561,0,0,1-.159-.261,4.166,4.166,0,0,1,1.332-1.352A3.438,3.438,0,0,1,501.332,260.662Z" />
++  </g>
++</svg>
+\ No newline at end of file

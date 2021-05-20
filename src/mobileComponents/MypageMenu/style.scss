@@ -1,0 +1,42 @@
+@import "../../stylesheets/util";
+
+.mobile-menu {
+  overflow: scroll;
+  //margin-left: -5.5vw;
+  margin-top: 10px;
+  width: 100vw;
+  border-bottom: 1px solid #E8E8E8;
+
+  .menu-list {
+    width: max-content;
+    display: flex;
+    list-style: none;
+    padding: 0;
+    margin: 0;
+    & > * + * {
+      margin-left: 32px;
+    }
+
+    .link {
+      &:first-of-type {
+        margin-left: 5.5vw;
+      }
+
+      padding-bottom: 12px;
+      border-bottom: 2px solid #fff;
+
+      a {
+        color: #000;
+        font-size: 14px;
+        font-weight: bold;
+      }
+
+      &.active {
+        border-bottom: 2px solid #EF0050;
+        a {
+          color: #EF0050;
+        }
+      }
+    }
+  }
+}

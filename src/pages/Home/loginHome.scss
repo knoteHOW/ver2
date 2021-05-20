@@ -1,0 +1,248 @@
+@import "../../stylesheets/util";
+
+.main-container {
+  width: 1280px;
+  margin: 0 auto;
+  padding: 10px 0 96px;
+
+  .container {
+    margin-top: 48px;
+    padding-top: 0;
+    .title-header {
+      display: flex;
+      line-height: 35px;
+      margin-bottom: 20px;
+
+      .container-name, .more {
+        flex: none;
+      }
+
+      .container-name {
+        font-size: 24px;
+      }
+
+      .more {
+        margin-left: auto;
+        font-size: 15px;
+        color: #000;
+      }
+    }
+
+    .sub-list {
+      list-style: none;
+      padding: 0;
+      margin: 0;
+    }
+  }
+
+  .pass-container {
+    .pass-list-wrapper {
+      .pass-list {
+        display: flex;
+        flex-wrap: wrap;
+
+        & > * + * {
+          margin-left: 16px;
+        }
+
+        .pass {
+          .pass-wrap {
+            width: 308px;
+          }
+        }
+      }
+    }
+  }
+
+  .note-container {
+    .note-list-wrapper {
+      .note-list {
+        display: flex;
+        flex-wrap: wrap;
+
+        & > * + * {
+          margin-left: 16px;
+        }
+
+        .note {
+          &:nth-of-type(5) {
+            margin-left: 0;
+          }
+
+          &:nth-of-type(n+5) {
+            margin-top: 16px;
+          }
+
+          .note-wrap {
+            width: 308px;
+          }
+        }
+      }
+    }
+  }
+
+  .problem-container {
+    .problem-list-wrapper {
+      .problem-list {
+        display: flex;
+        flex-wrap: wrap;
+
+        & > * + * {
+          margin-left: 16px;
+        }
+
+        .problem {
+          &:nth-of-type(5) {
+            margin-left: 0;
+          }
+
+          &:nth-of-type(n+5) {
+            margin-top: 16px;
+          }
+
+          .problem-wrap {
+            width: 308px;
+          }
+        }
+      }
+    }
+  }
+
+  @include respond-to(mobile) {
+    width: 88.9vw;
+    margin: 0 auto;
+    padding: 26px 0 24px;
+
+    .container {
+      margin-top: 40px;
+
+      .title-header {
+        line-height: 24px;
+        margin-bottom: 16px;
+        .container-name {
+          font-size: 20px;
+          color: #000;
+          font-weight: bold;
+          max-width: 170px;
+        }
+
+        .more {
+          color: #6D6D6D;
+          font-weight: 900;
+
+          display: flex;
+          flex-flow: column-reverse;
+        }
+      }
+    }
+
+    .pass-container {
+      margin-top: 0;
+      .pass-list-wrapper {
+        .pass-list {
+          & > * + * {
+            margin-left: 0;
+          }
+
+          .pass {
+            &:nth-of-type(2n) {
+              margin-left: auto;
+            }
+
+            &:nth-of-type(n+3) {
+              margin-top: 16px;
+            }
+            .pass-wrap {
+              width: 43.33vw;
+            }
+          }
+        }
+      }
+    }
+
+    .note-container {
+      .note-list-wrapper {
+        overflow: scroll;
+        width: 100vw;
+        margin-left: -5vw;
+        .note-list {
+          width: max-content;
+          display: flex;
+
+          & > * + * {
+            margin-left: 16px;
+          }
+
+          .note {
+            &:first-of-type {
+              margin-left: 5vw;
+            }
+
+            &:nth-of-type(5) {
+              margin-left: 16px;
+            }
+
+            &:nth-of-type(n+5) {
+              margin-top: 0;
+            }
+
+            .note-wrap {
+              width: 232px;
+
+              .thumbnail-wrap {
+                padding: 8px;
+                .cover-img {
+                  width: 100%;
+                }
+              }
+            }
+          }
+        }
+      }
+    }
+
+    .problem-container {
+      .problem-list-wrapper {
+        overflow: scroll;
+        width: 100vw;
+        margin-left: -5vw;
+        .problem-list {
+          //width: calc(1960px + 5vw);
+          width: max-content;
+          display: flex;
+
+          & > * + * {
+            margin-left: 16px;
+          }
+
+          .problem {
+            &:first-of-type {
+              margin-left: 5vw;
+            }
+
+            &:nth-of-type(5) {
+              margin-left: 16px;
+            }
+
+            &:nth-of-type(n+5) {
+              margin-top: 0;
+            }
+
+            .problem-wrap {
+              width: 232px;
+
+              .thumbnail-wrap {
+                padding: 8px;
+                .cover-img {
+                  width: 100%;
+                }
+              }
+            }
+          }
+        }
+      }
+    }
+
+
+  }
+}

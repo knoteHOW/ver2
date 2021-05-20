@@ -1,0 +1,119 @@
+.m-loginhome-wrap {
+  width: 100vw;
+  margin-top: 56px;
+  .m-loginhome-container {
+    padding: 36px 20px 32px 20px;
+    background: linear-gradient(147deg, #FFF2E0 0%, #EEE0FF 100%);
+    .m-lh-heading {
+      margin-bottom: 32px;
+      p {
+        font-size: 32px;
+        font-weight: bold;
+      }
+    }
+    .m-lh-body {
+      margin-bottom: 32px;
+      p {
+        font-size: 14px;
+      }
+    }
+    .m-lh-figure {
+      margin-bottom: 32px;
+      display: flex;
+      justify-content: flex-end;
+      img {
+        width: 80%;
+      }
+    }
+    .m-lh-search-btn {
+      width: 100%;
+      padding: 12px;
+      background: #FFFFFF;
+      box-shadow: 0px 1px 4px #00000029;
+      border-radius: 3px;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      font-size: 16px;
+      font-weight: bold;
+      img {
+        width: 24px;
+        height: 24px;
+      }
+    }
+  }
+  .m-lh-list,
+  .m-lh-question-wrap {
+    width: 100%; 
+    align-items: center;
+    justify-content: center;
+    padding: 32px 20px 8px 20px;  
+    position: relative;
+    
+    .m-lh-list-more{
+      position: absolute;
+      top: 60px;
+      right: 20px;
+      //display: flex;
+      p{
+        font-size: 15px;
+        font-weight: 900;
+        color: #6D6D6D;
+      }
+    }
+    
+    .m-lh-list-text{
+      p{
+        font-size: 20px;
+        font-weight: bold;
+      }
+      .m-lh-list-text-top{  
+        display: flex;
+        .m-lh-list-list{
+          display: flex;        
+          //flex-direction: row;
+          p{
+            font-size: 20px;
+            font-weight: bold;
+            margin-right:5px;
+          }        
+        }        
+        .m-lh-list-grade{
+          display: flex;        
+          //flex-direction: row;
+          p{
+            font-size: 20px;
+            font-weight: bold;
+          }        
+        }
+      }
+    }
+    .m-lh-list-list-scroll{
+      overflow-x: scroll;
+      overflow-y: hidden;
+      white-space: nowrap;
+      .m-lh-list-list{
+        margin-top: 20px;
+        display: flex;
+      }
+      .m-lh-question-list {
+        .question-wrap {
+          margin-bottom: 20px;
+          padding: 0 20px;
+          &:nth-child(1) {
+            margin-top: 20px;
+          }
+        }
+      }
+    }
+  }
+  .m-lh-question-wrap {
+    padding: 36px 0 32px 0;
+    .m-lh-list-text {
+      p {
+        margin-left: 20px;
+      }
+    }
+  }
+}
+

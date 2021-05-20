@@ -1,0 +1,186 @@
+@import "../../stylesheets/util";
+
+.payment-method-container {
+  .payment-method-wrapper {
+    margin-top: 41px;
+    border: 2px solid #E8E8E8;
+    border-radius: 5px;
+    display: flex;
+    padding: 24px;
+
+    .card-img-wrapper {
+      background-image: url("https://knotehow-image.s3.ap-northeast-2.amazonaws.com/card.svg");
+      width: 296px;
+      height: 198px;
+      background-size: contain;
+      background-repeat: no-repeat;
+    }
+
+    .card-info-wrapper {
+      margin-left: 32px;
+
+      .card-info {
+        display: flex;
+        .label {
+          font-size: 15px;
+          line-height: 40px;
+          font-weight: bold;
+          color: #000;
+        }
+
+        .v {
+          width: 296px;
+          padding: 9px 8px;
+          margin-left: 45px;
+          background-color: #E8E8E8;
+          border-radius: 5px;
+          color: #BEBEBE;
+          line-height: 22px;
+        }
+      }
+
+      .ant-form-item-required {
+        width: 210px;
+        &:before, &:after {
+          display: none;
+        }
+      }
+
+      .ant-input {
+        width: 296px;
+        height: 40px;
+        border-radius: 5px;
+        border: 1px solid #E8E8E8;
+        background-color: #FAFAFA;
+      }
+
+      .ant-btn-primary {
+        width: 100%;
+        background-color: #EF0050;
+        border-color: #EF0050;
+      }
+    }
+
+    .register-btn {
+      cursor: pointer;
+      width: 144px;
+      height: 48px;
+      line-height: 48px;
+      margin-left: auto;
+      background-color: #EF0050;
+      border-radius: 3px;
+      font-width: 500;
+      font-size: 18px;
+      color: #fff;
+      text-align: center;
+    }
+
+  }
+
+  @include respond-to(mobile) {
+    .payment-method-wrapper {
+      width: 88.9vw;
+      margin: 24px auto 0;
+      border: 0;
+      border-radius: 0;
+      display: block;
+      padding: 0;
+
+      .card-img-wrapper {
+        background-image: url("https://knotehow-image.s3.ap-northeast-2.amazonaws.com/card.svg");
+        width: 296px;
+        height: 198px;
+        margin: 0 auto;
+        background-size: contain;
+        background-repeat: no-repeat;
+      }
+
+      .card-info-wrapper {
+        margin-left: 0;
+        width: 100%;
+        order: 3;
+
+        .card-info {
+          display: block;
+          .label {
+            font-size: 15px;
+            line-height: 40px;
+            font-weight: bold;
+            color: #000;
+          }
+
+          .v {
+            width: 88.9vw;
+            padding: 9px 8px;
+            margin-left: 0;
+            color: #BEBEBE;
+            line-height: 22px;
+          }
+        }
+
+        .ant-form-item-required {
+          width: 210px;
+          &:before, &:after {
+            display: none;
+          }
+        }
+
+        .ant-input {
+          width: 100%;
+          height: 40px;
+          border-radius: 5px;
+          border: 1px solid #E8E8E8;
+          background-color: #FAFAFA;
+        }
+
+        .ant-btn-primary {
+          width: 100%;
+          background-color: #EF0050;
+          border-color: #EF0050;
+        }
+      }
+
+      .register-btn {
+        cursor: pointer;
+        width: 144px;
+        height: 48px;
+        line-height: 48px;
+        margin-left: auto;
+        background-color: #EF0050;
+        border-radius: 3px;
+        font-width: 500;
+        font-size: 18px;
+        color: #fff;
+        text-align: center;
+      }
+
+      &.exist {
+        display: grid;
+        grid-template-columns: 160px 160px;
+        grid-template-rows: 88px 80px;
+
+        align-items: center;
+
+        .card-img-wrapper {
+          width: 160px;
+          height: 88px;
+          order: 1
+        }
+
+        .reg-wrapper {
+          order: 2;
+          display: grid;
+          justify-content: right;
+          .register-btn {
+            margin-left: 0;
+            width: 100px;
+            height: 32px;
+            line-height: 32px;
+            font-size: 14px;
+          }
+        }
+      }
+
+    }
+  }
+}

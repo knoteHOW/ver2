@@ -1,0 +1,76 @@
+diff --git a/node_modules/@ckeditor/ckeditor5-image/.DS_Store b/node_modules/@ckeditor/ckeditor5-image/.DS_Store
+new file mode 100644
+index 0000000..e69de29
+diff --git a/node_modules/@ckeditor/ckeditor5-image/src/imageresize/imageresizebuttons.js b/node_modules/@ckeditor/ckeditor5-image/src/imageresize/imageresizebuttons.js
+index 8b1684f..03dbcbf 100644
+--- a/node_modules/@ckeditor/ckeditor5-image/src/imageresize/imageresizebuttons.js
++++ b/node_modules/@ckeditor/ckeditor5-image/src/imageresize/imageresizebuttons.js
+@@ -159,7 +159,7 @@ export default class ImageResizeButtons extends Plugin {
+ 			const dropdownButton = dropdownView.buttonView;
+ 
+ 			dropdownButton.set( {
+-				tooltip: t( 'Resize image' ),
++				tooltip: t( '' ),
+ 				commandValue: originalSizeOption.value,
+ 				icon: iconMedium,
+ 				isToggleable: true,
+@@ -208,15 +208,15 @@ export default class ImageResizeButtons extends Plugin {
+ 			return option.label;
+ 		} else if ( forTooltip ) {
+ 			if ( option.value ) {
+-				return t( 'Resize image to %0', option.value + this._resizeUnit );
++				return t( '%0', option.value + this._resizeUnit );
+ 			} else {
+-				return t( 'Resize image to the original size' );
++				return t( '100%' );
+ 			}
+ 		} else {
+ 			if ( option.value ) {
+ 				return option.value + this._resizeUnit;
+ 			} else {
+-				return t( 'Original' );
++				return t( '100%' );
+ 			}
+ 		}
+ 	}
+diff --git a/node_modules/@ckeditor/ckeditor5-image/src/imageupload/imageuploadui.js b/node_modules/@ckeditor/ckeditor5-image/src/imageupload/imageuploadui.js
+index 1cd2fe5..10f854b 100644
+--- a/node_modules/@ckeditor/ckeditor5-image/src/imageupload/imageuploadui.js
++++ b/node_modules/@ckeditor/ckeditor5-image/src/imageupload/imageuploadui.js
+@@ -11,7 +11,7 @@ import Plugin from '@ckeditor/ckeditor5-core/src/plugin';
+ import FileDialogButtonView from '@ckeditor/ckeditor5-upload/src/ui/filedialogbuttonview';
+ import { createImageTypeRegExp } from './utils';
+ 
+-import imageIcon from '@ckeditor/ckeditor5-core/theme/icons/image.svg';
++import imageIcon from '../../theme/icons/my_image.svg';
+ 
+ /**
+  * The image upload button plugin.
+@@ -50,7 +50,7 @@ export default class ImageUploadUI extends Plugin {
+ 			} );
+ 
+ 			view.buttonView.set( {
+-				label: t( 'Insert image' ),
++				label: t( '사진' ),
+ 				icon: imageIcon,
+ 				tooltip: true
+ 			} );
+diff --git a/node_modules/@ckeditor/ckeditor5-image/theme/icons/my_image.svg b/node_modules/@ckeditor/ckeditor5-image/theme/icons/my_image.svg
+new file mode 100644
+index 0000000..2f2de5f
+--- /dev/null
++++ b/node_modules/@ckeditor/ckeditor5-image/theme/icons/my_image.svg
+@@ -0,0 +1,12 @@
++<svg class="my-image-svg" xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 20 20">
++  <defs>
++    <style>
++      .image-a {
++        fill: #505050;
++      }
++    </style>
++  </defs>
++  <path class="image-a"
++    d="M540.874,860.346l2.222-2.222,6.111,6.111,3.889-3.889,3.333,3.333V853.568H540.874Zm-1.111-9h17.778a1.111,1.111,0,0,1,1.111,1.111v17.778a1.111,1.111,0,0,1-1.111,1.111H539.763a1.111,1.111,0,0,1-1.111-1.111V852.457A1.111,1.111,0,0,1,539.763,851.346Zm12.778,7.778a1.667,1.667,0,1,1,1.667-1.667A1.667,1.667,0,0,1,552.541,859.124Z"
++    transform="translate(-538.652 -851.346)" />
++</svg>
+\ No newline at end of file

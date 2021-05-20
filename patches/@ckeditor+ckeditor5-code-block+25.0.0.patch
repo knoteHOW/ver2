@@ -1,0 +1,203 @@
+diff --git a/node_modules/@ckeditor/ckeditor5-code-block/.DS_Store b/node_modules/@ckeditor/ckeditor5-code-block/.DS_Store
+new file mode 100644
+index 0000000..e69de29
+diff --git a/node_modules/@ckeditor/ckeditor5-code-block/src/codeblockediting.js b/node_modules/@ckeditor/ckeditor5-code-block/src/codeblockediting.js
+index 8354313..08065b2 100644
+--- a/node_modules/@ckeditor/ckeditor5-code-block/src/codeblockediting.js
++++ b/node_modules/@ckeditor/ckeditor5-code-block/src/codeblockediting.js
+@@ -55,7 +55,6 @@ export default class CodeBlockEditing extends Plugin {
+ 
+ 		editor.config.define( 'codeBlock', {
+ 			languages: [
+-				{ language: 'plaintext', label: 'Plain text' },
+ 				{ language: 'c', label: 'C' },
+ 				{ language: 'cs', label: 'C#' },
+ 				{ language: 'cpp', label: 'C++' },
+@@ -68,7 +67,8 @@ export default class CodeBlockEditing extends Plugin {
+ 				{ language: 'python', label: 'Python' },
+ 				{ language: 'ruby', label: 'Ruby' },
+ 				{ language: 'typescript', label: 'TypeScript' },
+-				{ language: 'xml', label: 'XML' }
++				{ language: 'xml', label: 'XML' },
++				{ language: 'matlab', label: 'MATLAB' }
+ 			],
+ 
+ 			// A single tab.
+@@ -117,13 +117,31 @@ export default class CodeBlockEditing extends Plugin {
+ 			allowIn: 'codeBlock'
+ 		} );
+ 
+-		// Disallow all attributes on $text inside `codeBlock`.
+-		schema.addAttributeCheck( context => {
+-			if ( context.endsWith( 'codeBlock $text' ) ) {
++		schema.addChildCheck( ( ctx, childDef ) => {
++			if ( ctx.endsWith( 'codeBlock' ) && childDef.name == 'plain' ) {
++				return false;
++			}
++			else if ( ctx.endsWith( 'codeBlock' ) && childDef.name == 'blockQuote' ) {
++				return false;
++			}
++			else if ( ctx.endsWith( 'codeBlock' ) && childDef.name == 'image' ) {
++				return false;
++			}
++			else if ( ctx.endsWith( 'codeBlock' ) && childDef.name == 'table' ) {
++				return false;
++			}
++			else if ( ctx.endsWith( 'codeBlock' ) && childDef.name == 'codeBlock' ) {
+ 				return false;
+ 			}
+ 		} );
+ 
++		// Disallow all attributes on $text inside `codeBlock`.
++		// schema.addAttributeCheck( context => {
++		// 	if ( context.endsWith( 'codeBlock $text' ) ) {
++		// 		return false;
++		// 	}
++		// } );
++
+ 		// Conversion.
+ 		editor.editing.downcastDispatcher.on( 'insert:codeBlock', modelToViewCodeBlockInsertion( model, normalizedLanguagesDefs, true ) );
+ 		editor.data.downcastDispatcher.on( 'insert:codeBlock', modelToViewCodeBlockInsertion( model, normalizedLanguagesDefs ) );
+diff --git a/node_modules/@ckeditor/ckeditor5-code-block/src/codeblockui.js b/node_modules/@ckeditor/ckeditor5-code-block/src/codeblockui.js
+index 3a349f9..78e2abf 100644
+--- a/node_modules/@ckeditor/ckeditor5-code-block/src/codeblockui.js
++++ b/node_modules/@ckeditor/ckeditor5-code-block/src/codeblockui.js
+@@ -14,7 +14,7 @@ import SplitButtonView from '@ckeditor/ckeditor5-ui/src/dropdown/button/splitbut
+ import { createDropdown, addListToDropdown } from '@ckeditor/ckeditor5-ui/src/dropdown/utils';
+ import { getNormalizedAndLocalizedLanguageDefinitions } from './utils';
+ 
+-import codeBlockIcon from '../theme/icons/codeblock.svg';
++import codeBlockIcon from '../theme/icons/my_codeblock.svg';
+ import '../theme/codeblock.css';
+ 
+ /**
+@@ -41,7 +41,7 @@ export default class CodeBlockUI extends Plugin {
+ 			const splitButtonView = dropdownView.buttonView;
+ 
+ 			splitButtonView.set( {
+-				label: t( 'Insert code block' ),
++				label: t( '코드 블럭' ),
+ 				tooltip: true,
+ 				icon: codeBlockIcon,
+ 				isToggleable: true
+diff --git a/node_modules/@ckeditor/ckeditor5-code-block/src/converters.js b/node_modules/@ckeditor/ckeditor5-code-block/src/converters.js
+index 1131ca7..de8da45 100644
+--- a/node_modules/@ckeditor/ckeditor5-code-block/src/converters.js
++++ b/node_modules/@ckeditor/ckeditor5-code-block/src/converters.js
+@@ -186,6 +186,17 @@ export function dataViewToModelCodeBlockInsertion( editingView, languageDefs ) {
+ 		// HTML elements are invalid content for `<code>`.
+ 		// Read only text nodes.
+ 		const textData = [ ...editingView.createRangeIn( viewChild ) ]
++// 		let tempData = '';
++// 		let tempNum = 0;
++// 		for (let i=0; i<textData.length; i++) {
++// 			if(textData[i].type === 'text') {
++// 				tempData += textData[i].item.data
++// 				tempNum += 1;
++// 			} else if(textData[i].type === "elementStart" && tempNum !== textData2.length && tempNum !== 0) {
++// 				tempData += `
++// `
++// 			}
++// 		}
+ 			.filter( current => current.type === 'text' )
+ 			.map( ( { item } ) => item.data )
+ 			.join( '' );
+diff --git a/node_modules/@ckeditor/ckeditor5-code-block/src/outdentcodeblockcommand.js b/node_modules/@ckeditor/ckeditor5-code-block/src/outdentcodeblockcommand.js
+index 18e9df5..4532afa 100644
+--- a/node_modules/@ckeditor/ckeditor5-code-block/src/outdentcodeblockcommand.js
++++ b/node_modules/@ckeditor/ckeditor5-code-block/src/outdentcodeblockcommand.js
+@@ -134,7 +134,13 @@ function getLastOutdentableSequenceRange( model, position, sequence ) {
+ 	}
+ 
+ 	const leadingWhiteSpaces = getLeadingWhiteSpaces( nodeAtPosition );
+-	const lastIndexOfSequence = leadingWhiteSpaces.lastIndexOf( sequence );
++	let lastIndexOfSequence;
++	if (!leadingWhiteSpaces) {
++		lastIndexOfSequence = -1;
++		return null;
++	} else {
++		lastIndexOfSequence = leadingWhiteSpaces.lastIndexOf( sequence );
++	}
+ 
+ 	// For instance, assuming the indent sequence is 4x space ("    "):
+ 	//
+diff --git a/node_modules/@ckeditor/ckeditor5-code-block/src/utils.js b/node_modules/@ckeditor/ckeditor5-code-block/src/utils.js
+index 15ead07..994e522 100644
+--- a/node_modules/@ckeditor/ckeditor5-code-block/src/utils.js
++++ b/node_modules/@ckeditor/ckeditor5-code-block/src/utils.js
+@@ -96,7 +96,9 @@ export function getPropertyAssociation( languageDefs, key, value ) {
+  * @returns {String}
+  */
+ export function getLeadingWhiteSpaces( textNode ) {
+-	return textNode.data.match( /^(\s*)/ )[ 0 ];
++	if (textNode.data) {
++		return textNode.data.match( /^(\s*)/ )[ 0 ];
++	}
+ }
+ 
+ /**
+diff --git a/node_modules/@ckeditor/ckeditor5-code-block/theme/icons/.DS_Store b/node_modules/@ckeditor/ckeditor5-code-block/theme/icons/.DS_Store
+new file mode 100644
+index 0000000..e69de29
+diff --git a/node_modules/@ckeditor/ckeditor5-code-block/theme/icons/block.svg b/node_modules/@ckeditor/ckeditor5-code-block/theme/icons/block.svg
+new file mode 100644
+index 0000000..ff14fba
+--- /dev/null
++++ b/node_modules/@ckeditor/ckeditor5-code-block/theme/icons/block.svg
+@@ -0,0 +1 @@
++<svg id="Capa_1" enable-background="new 0 0 512 512" height="512" viewBox="0 0 512 512" width="512" xmlns="http://www.w3.org/2000/svg"><g><path d="m256.002 242.913 210.412-121.43-210.412-121.483-210.416 121.483z"/><path d="m240.949 268.986-210.415-121.429v242.96l210.415 121.483z"/><path d="m271.056 268.986v243.014l210.41-121.483v-242.96z"/></g></svg>
+\ No newline at end of file
+diff --git a/node_modules/@ckeditor/ckeditor5-code-block/theme/icons/my_block.svg b/node_modules/@ckeditor/ckeditor5-code-block/theme/icons/my_block.svg
+new file mode 100644
+index 0000000..63c1676
+--- /dev/null
++++ b/node_modules/@ckeditor/ckeditor5-code-block/theme/icons/my_block.svg
+@@ -0,0 +1,23 @@
++<svg class="my-block-svg" xmlns="http://www.w3.org/2000/svg" width="24" height="16" viewBox="0 0 24 16">
++  <defs>
++    <style>
++      .block-a {
++        fill: none;
++        stroke-linecap: round;
++      }
++
++      .block-b {
++        stroke: none;
++      }
++
++      .block-c {
++        fill: #505050;
++      }
++    </style>
++  </defs>
++  <g class="block-a">
++    <path class="block-b" d="M4,0H20a4,4,0,0,1,4,4v8a4,4,0,0,1-4,4H4a4,4,0,0,1-4-4V4A4,4,0,0,1,4,0Z" />
++    <path class="block-c"
++      d="M 4 2 C 2.897199630737305 2 2 2.897199630737305 2 4 L 2 12 C 2 13.1028003692627 2.897199630737305 14 4 14 L 20 14 C 21.1028003692627 14 22 13.1028003692627 22 12 L 22 4 C 22 2.897199630737305 21.1028003692627 2 20 2 L 4 2 M 4 0 L 20 0 C 22.20914077758789 0 24 1.790860176086426 24 4 L 24 12 C 24 14.20913982391357 22.20914077758789 16 20 16 L 4 16 C 1.790859222412109 16 0 14.20913982391357 0 12 L 0 4 C 0 1.790860176086426 1.790859222412109 0 4 0 Z" />
++  </g>
++</svg>
+\ No newline at end of file
+diff --git a/node_modules/@ckeditor/ckeditor5-code-block/theme/icons/my_codeblock.svg b/node_modules/@ckeditor/ckeditor5-code-block/theme/icons/my_codeblock.svg
+new file mode 100644
+index 0000000..8804d08
+--- /dev/null
++++ b/node_modules/@ckeditor/ckeditor5-code-block/theme/icons/my_codeblock.svg
+@@ -0,0 +1,17 @@
++<svg class="my-codeblock-svg" xmlns="http://www.w3.org/2000/svg" style="width:25.98px; height:16px;"  viewBox="0 0 25.98 16">
++  <defs>
++    <style>
++      .codeblock-a {
++        fill: #505050;
++      }
++    </style>
++  </defs>
++  <g transform="translate(-580.584 -211.038)">
++    <path class="codeblock-a"
++      d="M588.437,214a.882.882,0,0,1,.495.5,1.27,1.27,0,0,1,.1.708.755.755,0,0,1-.461.572l-5.5,2.765v.1l5.5,2.8a.754.754,0,0,1,.461.571,1.348,1.348,0,0,1-.1.726.88.88,0,0,1-.5.495.932.932,0,0,1-.759-.1l-6.078-3.193a2.152,2.152,0,0,1-.819-.614,1.264,1.264,0,0,1-.188-.7,1.672,1.672,0,0,1,.043-.384.917.917,0,0,1,.153-.333,1.4,1.4,0,0,1,.308-.3,4.673,4.673,0,0,1,.5-.316l6.095-3.192A.921.921,0,0,1,588.437,214Z" />
++    <path class="codeblock-a"
++      d="M596.314,211.1a.984.984,0,0,1,.58.41.752.752,0,0,1,.069.7l-4.848,14.22a.8.8,0,0,1-.521.555,1.288,1.288,0,0,1-.76-.008.963.963,0,0,1-.572-.4.78.78,0,0,1-.059-.709l4.831-14.22a.8.8,0,0,1,.521-.555A1.285,1.285,0,0,1,596.314,211.1Z" />
++    <path class="codeblock-a"
++      d="M605.557,217.3a4.7,4.7,0,0,1,.5.316,1.414,1.414,0,0,1,.307.3.917.917,0,0,1,.153.333,1.62,1.62,0,0,1,.043.384,1.272,1.272,0,0,1-.187.7,2.166,2.166,0,0,1-.82.614l-6.078,3.193a.932.932,0,0,1-.759.1.88.88,0,0,1-.5-.495,1.338,1.338,0,0,1-.1-.726.75.75,0,0,1,.461-.571l5.5-2.8v-.1l-5.5-2.765a.751.751,0,0,1-.461-.572,1.26,1.26,0,0,1,.1-.708.881.881,0,0,1,.5-.5.919.919,0,0,1,.75.1Z" />
++  </g>
++</svg>
+\ No newline at end of file

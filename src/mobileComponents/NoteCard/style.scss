@@ -1,0 +1,77 @@
+@import "../../stylesheets/util";
+
+.notecard-wrap {
+  +.notecard-wrap {
+    margin-left: 16px;
+  }
+  .notecard-container {    
+    width: 154px;
+    //background-color: #6D6D6D;
+    position: relative;
+
+    .notecard-bookmark {
+      position: absolute;
+      top: 8px;
+      right: 8px;
+      
+      .notecard-img {
+        background-image: url("../../img/courses/bookmark.svg");
+        background-size: contain;
+        background-repeat: no-repeat;
+        color: #ffffff;
+        width: 16px;
+        height: 26px;
+      }
+
+      &.notecard-active {
+        //border: 2px solid #EF0050;
+        color: #EF0050;
+        .notecard-img {
+          background-image: url("../../img/courses/selected-bookmark.svg");
+        }
+      }
+    }
+
+    .notecard-image {
+      width: 154px;
+      height: 179px;
+      background-color: #000fff;
+      border-radius: 4px;
+    }        
+    .notecard-text-header{
+      display: flex;
+      align-items: center;
+      margin-top: 8px;
+      
+      .notecard-text-school{
+        p {
+          font-weight: bold;
+          font-size: 11px;
+          color: #EF0050;
+        }
+      }
+
+      .notecard-text-subject{
+        p{
+          font-weight: normal;
+          font-size: 11px;
+        }
+      }
+    }
+    .notecard-text-title{
+      p{
+        font-weight:bold;
+        font-size:16px;
+      }
+    }
+    .notecard-text-sub{
+      display: flex;
+      align-items: center;
+      p{
+        font-weight:normal;
+        font-size:12px;
+        color: #6D6D6D;
+      }
+    }
+  }
+}

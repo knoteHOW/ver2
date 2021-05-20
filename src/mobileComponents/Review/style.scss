@@ -1,0 +1,42 @@
+@import "../../stylesheets/util";
+
+
+.m-review-container{
+  
+  padding: 0 20px;
+  margin-bottom: 16px;
+  .m-top{
+    display: flex;
+    img{
+      width:44px;
+      height:44px;
+    }
+    .m-top-right{
+      margin-left: 12px;
+      .nickname{
+        font-size: 12px;
+      }
+      .date-score{
+        display: flex;
+        align-items: center;
+        .date{
+          font-size: 12px;
+          color: #BEBEBE;
+        }
+        .score{
+          margin-left: 6px;
+          display: flex;
+          padding-bottom: 2px;
+          .ant-rate-star:not(:last-child) {
+            margin-right: 1px;
+          }
+        }        
+      }
+    }
+  }
+  .m-bottom{
+    width: 88vw;
+    margin-top:12px;
+    font-size: 14px;
+  }
+}

@@ -1,0 +1,222 @@
+@import "../../stylesheets/util";
+
+.m-main-container{
+  width:100vw;
+  .m-main-image-1{
+    padding: 0 20px 32px 20px;
+    margin-top: 56px;
+    padding-top: 36px;
+    background: linear-gradient(156deg, #E0F2FF, #EEE0FF);
+    .m-main-heading {
+      p {
+        font-size: 32px;
+        font-weight: bold;
+      }
+    }
+    .m-main-body {
+      margin-top: 32px;
+      p {
+        font-size: 14px;
+      }
+    }
+    .m-main-figure {
+      display: flex;
+      justify-content: flex-end;
+      margin-bottom: 32px;
+      img {
+        width: 70%;
+      }
+    }
+    .m-main-search-button{
+      width: 100%;
+      height:48px;
+      background: #ffffff;
+      border-radius: 5px;
+      box-shadow: 0 1px 7px #b0b0b0;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      p{
+        font-size: 16px;
+        font-weight: bold;  
+      }
+    }
+  }
+  .m-main-school{
+    height:195px;
+    width: 100%; 
+    align-items: center;
+    justify-content: center;
+    padding: 30px 20px;   
+    
+    .m-main-school-text{ 
+      margin-bottom: 16px;
+      p{
+        font-size: 18px;
+        font-weight: bold; 
+      }
+    }
+  }
+  .m-main-school-2{
+    height:328px;
+    width: 100%; 
+    align-items: center;
+    justify-content: center;
+    padding: 40px 20px; 
+    position: relative;
+    
+    .m-main-school-more{
+      position: absolute;
+      top: 60px;
+      right: 20px;
+      //display: flex;
+      p{
+        font-size: 15px;
+        font-weight: 900;
+        color: #6D6D6D;
+      }
+    }
+    
+    .m-main-school-text{
+      p{
+        font-size: 20px;
+        font-weight: bold;
+      }
+      .m-main-school-text-top{  
+        display: flex;
+        .m-main-school-school{
+          display: flex;        
+          //flex-direction: row;
+          p{
+            font-size: 20px;
+            font-weight: bold;
+            margin-right:5px;
+          }        
+        }        
+        .m-main-school-grade{
+          display: flex;        
+          //flex-direction: row;
+          p{
+            font-size: 20px;
+            font-weight: bold;
+          }        
+        }
+      }
+    }
+    .m-main-school-course-scroll{
+      overflow-x: scroll;
+      overflow-y: hidden;
+      white-space: nowrap;
+      .m-main-school-course{
+        margin-top: 20px;
+        display: flex;
+      }
+    }
+  }
+  .m-main-pass-container{
+    background: linear-gradient(156deg, #E5F7F8, #FFEAEA);
+    height:807px;
+    display: flex;
+    flex-direction: column;
+    align-items: center; 
+    padding: 0 20px;
+
+    .m-main-pass-header{
+      p{
+        font-size:24px;
+        font-weight: bold;
+        margin-top:32px;
+        margin-bottom: 16px;
+      }
+    }
+    .m-main-pass-search{
+      width: 100%;
+      height: 48px;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      position: relative;  
+      padding: 0px 16px;      
+      //margin: 0px 8px;
+      border-radius: 3px;
+      box-shadow: 0px 1px 4px #00000029;
+      background-color: #ffffff;
+
+    
+      p{
+        font-weight:bold;
+        font-size:16px;
+        color: #BEBEBE;
+      }
+       
+      img {
+        width: 20px;
+        height: 20px;
+      }
+    }
+  }
+  .m-main-review{
+    padding: 40px 32px;
+    position: relative;
+    .m-review-text {
+      font-size: 28px;
+      font-weight: bold;
+      margin-bottom: 70px;
+    }
+    img {
+      position: absolute;
+      top: 70px;
+      right: 20px;
+      width: 40%;
+    }
+    .carousel  {
+      .carousel-control-prev,
+      .carousel-control-next {
+        position: absolute;
+        top: 50%;
+        transform: translate(0, -50%);
+        width: 15px;
+        height: 25px;
+        cursor: pointer;
+      }
+      .carousel-control-prev {
+        left: -20px;
+        background-image: url('https://knotehow-image.s3.ap-northeast-2.amazonaws.com/1615349965505.png');
+        background-size: contain;
+        > span {
+          width: 0;
+        }
+      }
+      .carousel-control-next {
+        right: -20px;
+        background-image: url('https://knotehow-image.s3.ap-northeast-2.amazonaws.com/1615350058275.png');
+        background-size: contain;
+        > span {
+          width: 0;
+        }
+      }
+    } 
+    .m-main-review-box{
+      width:296px;
+      height:114px;
+      background: #FFFFFF ;
+      box-shadow: 0px 3px 6px #00000029;
+      border-radius: 5px;
+    }
+  }
+  
+  .m-main-step{
+    padding: 0 20px;
+    display:flex;
+    flex-direction: column;
+    background: linear-gradient(169deg, #E5F2DC, #FCEBA3);
+    .m-main-step-text{
+      margin: 32px 0px;
+        p {
+          font-size: 24px;
+          font-weight: bold;
+          text-align: center;
+        }
+    }
+  }
+}

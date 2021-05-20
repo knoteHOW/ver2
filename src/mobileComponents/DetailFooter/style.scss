@@ -1,0 +1,66 @@
+.df-wrap {
+  position: fixed;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  background-color: #FFFFFF;
+  .study-alarm {
+    padding: 1px 0;
+    font-size: 12px;
+    background-color: #BEBEBE;
+    box-shadow: -2px -2px 8px #00000029;
+    display: flex;
+    justify-content: center;
+    .number {
+      padding: 1px 4px;
+      background-color: #EF0050;
+      border-radius: 3px;
+      color: #FFFFFF;
+      margin-right: 2px;
+    }
+    .school {
+      font-weight: bold;
+      color: #EF0050;
+    }
+  }
+  .btn-area {
+    display: flex;
+    justify-content: center;
+    padding: 4px 20px;
+    > div {
+      height: 40px;
+      padding: 8px 0;
+      border-radius: 5px;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      font-size: 16px;
+      font-weight: bold;
+    }
+    > div + div {
+      margin-left: 8px;
+    }
+    .contain-btn {
+      width: 40%;
+      border: 2px solid #BEBEBE;
+      color: #6D6D6D;
+      svg {
+        margin-right: 4px;
+      }
+      &:active {
+        color: #EF0050;
+        border: 2px solid #EF0050;
+      }
+    }
+    .question-btn,
+    .purchase-btn {
+      width: 60%;
+      background-color: #EF0050;
+      color: #FFFFFF;
+    }
+    .on-btn {
+      color: #EF0050;
+      border: 2px solid #EF0050;
+    }
+  }
+}

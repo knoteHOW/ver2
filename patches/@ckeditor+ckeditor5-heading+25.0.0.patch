@@ -1,0 +1,78 @@
+diff --git a/node_modules/@ckeditor/ckeditor5-heading/src/headingediting.js b/node_modules/@ckeditor/ckeditor5-heading/src/headingediting.js
+index d84355d..4d4418a 100644
+--- a/node_modules/@ckeditor/ckeditor5-heading/src/headingediting.js
++++ b/node_modules/@ckeditor/ckeditor5-heading/src/headingediting.js
+@@ -89,6 +89,7 @@ export default class HeadingEditing extends Plugin {
+ 		// If the enter command is added to the editor, alter its behavior.
+ 		// Enter at the end of a heading element should create a paragraph.
+ 		const editor = this.editor;
++		const schema = editor.model.schema;
+ 		const enterCommand = editor.commands.get( 'enter' );
+ 		const options = editor.config.get( 'heading.options' );
+ 
+@@ -102,6 +103,65 @@ export default class HeadingEditing extends Plugin {
+ 				}
+ 			} );
+ 		}
++		schema.addChildCheck( ( ctx, childDef ) => {
++			if ( ctx.endsWith( 'heading1' ) && childDef.name == 'plain' ) {
++				return false;
++			}
++			else if ( ctx.endsWith( 'heading1' ) && childDef.name == 'blockQuote' ) {
++				return false;
++			}
++			else if ( ctx.endsWith( 'heading1' ) && childDef.name == 'image' ) {
++				return false;
++			}
++			else if ( ctx.endsWith( 'heading1' ) && childDef.name == 'table' ) {
++				return false;
++			}
++			else if ( ctx.endsWith( 'heading1' ) && childDef.name == 'listItem' ) {
++				return false;
++			}
++			else if ( ctx.endsWith( 'heading1' ) && childDef.name == 'codeBlock' ) {
++				return false;
++			}
++			else if ( ctx.endsWith( 'heading1' ) && childDef.name == 'horizontalLine' ) {
++				return false;
++			}
++			else if ( ctx.endsWith( 'heading1' ) && childDef.name == 'heading1' ) {
++				return false;
++			}
++			else if ( ctx.endsWith( 'heading1' ) && childDef.name == 'heading2' ) {
++				return false;
++			}
++		} );
++		schema.addChildCheck( ( ctx, childDef ) => {
++			if ( ctx.endsWith( 'heading2' ) && childDef.name == 'plain' ) {
++				return false;
++			}
++			else if ( ctx.endsWith( 'heading2' ) && childDef.name == 'blockQuote' ) {
++				return false;
++			}
++			else if ( ctx.endsWith( 'heading2' ) && childDef.name == 'image' ) {
++				return false;
++			}
++			else if ( ctx.endsWith( 'heading2' ) && childDef.name == 'table' ) {
++				return false;
++			}
++			else if ( ctx.endsWith( 'heading2' ) && childDef.name == 'listItem' ) {
++				return false;
++			}
++			else if ( ctx.endsWith( 'heading2' ) && childDef.name == 'codeBlock' ) {
++				return false;
++			}
++			else if ( ctx.endsWith( 'heading2' ) && childDef.name == 'horizontalLine' ) {
++				return false;
++			}
++			else if ( ctx.endsWith( 'heading2' ) && childDef.name == 'heading1' ) {
++				return false;
++			}
++			else if ( ctx.endsWith( 'heading2' ) && childDef.name == 'heading2' ) {
++				return false;
++			}
++		} );
++
+ 	}
+ 
+ 	/**

@@ -1,0 +1,12 @@
+.sort-dropdown {
+  color: #000000;
+  font-size: 14px;
+  font-weight: 500;
+  &:active, &:hover {
+    color: #000000;
+  }
+  img {
+    width: 10px;
+    margin-left: 4px;
+  }
+}

@@ -1,0 +1,39 @@
+@import "../../stylesheets/util";
+
+.m-form {
+  padding: 0;
+  .ant-form-item {
+    width:100%;
+    //padding: 0 20px;
+    margin-bottom: 0;
+    .ant-form-item-control {
+      //justify-content: center;
+      // margin-top: 15px;
+      .ant-form-item-control-input {
+        .ant-input {
+          //width: 320px;
+          background: #ffffff;
+          border: 1px solid #E8E8E8;
+          border-radius: 5px;
+          height: 48px;
+        }
+      }
+      .ant-select-selector {
+        background: #ffffff;
+        //width: 320px;
+        border: 2px solid #EF0050;
+        border-radius: 5px;
+        height: 48px;          
+        
+        input {
+          height: 46px;
+        }
+        align-items: center;
+        .ant-select-selection-item {
+          display: flex;
+          align-items: center;
+        }
+      }
+    }        
+  }      
+}

@@ -1,0 +1,16 @@
+diff --git a/node_modules/@ckeditor/ckeditor5-ui/src/icon/iconview.js b/node_modules/@ckeditor/ckeditor5-ui/src/icon/iconview.js
+index cbd2ce9..02cdb4a 100644
+--- a/node_modules/@ckeditor/ckeditor5-ui/src/icon/iconview.js
++++ b/node_modules/@ckeditor/ckeditor5-ui/src/icon/iconview.js
+@@ -98,6 +98,11 @@ export default class IconView extends View {
+ 			const parsed = new DOMParser().parseFromString( this.content.trim(), 'image/svg+xml' );
+ 			const svg = parsed.querySelector( 'svg' );
+ 			const viewBox = svg.getAttribute( 'viewBox' );
++			const classList = svg.getAttribute( 'class' );
++
++			if(classList) {
++				this.element.classList.add(classList);
++			}
+ 
+ 			if ( viewBox ) {
+ 				this.viewBox = viewBox;

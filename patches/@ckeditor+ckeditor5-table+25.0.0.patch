@@ -1,0 +1,420 @@
+diff --git a/node_modules/@ckeditor/ckeditor5-table/.DS_Store b/node_modules/@ckeditor/ckeditor5-table/.DS_Store
+new file mode 100644
+index 0000000..e69de29
+diff --git a/node_modules/@ckeditor/ckeditor5-table/src/tablecellproperties/tablecellpropertiesui.js b/node_modules/@ckeditor/ckeditor5-table/src/tablecellproperties/tablecellpropertiesui.js
+index c4d5d1c..100917e 100644
+--- a/node_modules/@ckeditor/ckeditor5-table/src/tablecellproperties/tablecellpropertiesui.js
++++ b/node_modules/@ckeditor/ckeditor5-table/src/tablecellproperties/tablecellpropertiesui.js
+@@ -38,8 +38,6 @@ const propertyToCommandMap = {
+ 	borderWidth: 'tableCellBorderWidth',
+ 	width: 'tableCellWidth',
+ 	height: 'tableCellHeight',
+-	padding: 'tableCellPadding',
+-	backgroundColor: 'tableCellBackgroundColor',
+ 	horizontalAlignment: 'tableCellHorizontalAlignment',
+ 	verticalAlignment: 'tableCellVerticalAlignment'
+ };
+@@ -115,7 +113,7 @@ export default class TableCellPropertiesUI extends Plugin {
+ 			const view = new ButtonView( locale );
+ 
+ 			view.set( {
+-				label: t( 'Cell properties' ),
++				label: t( '셀 속성' ),
+ 				icon: tableCellProperties,
+ 				tooltip: true
+ 			} );
+diff --git a/node_modules/@ckeditor/ckeditor5-table/src/tablecellproperties/ui/tablecellpropertiesview.js b/node_modules/@ckeditor/ckeditor5-table/src/tablecellproperties/ui/tablecellpropertiesview.js
+index c19c1d3..dfbe3fe 100644
+--- a/node_modules/@ckeditor/ckeditor5-table/src/tablecellproperties/ui/tablecellpropertiesview.js
++++ b/node_modules/@ckeditor/ckeditor5-table/src/tablecellproperties/ui/tablecellpropertiesview.js
+@@ -316,30 +316,30 @@ export default class TableCellPropertiesView extends View {
+ 
+ 		// Form header.
+ 		this.children.add( new FormHeaderView( locale, {
+-			label: this.t( 'Cell properties' )
++			label: this.t( '셀 속성' )
+ 		} ) );
+ 
+ 		// Border row.
+-		this.children.add( new FormRowView( locale, {
+-			labelView: borderRowLabel,
+-			children: [
+-				borderRowLabel,
+-				borderStyleDropdown,
+-				borderColorInput,
+-				borderWidthInput
+-			],
+-			class: 'ck-table-form__border-row'
+-		} ) );
++		// this.children.add( new FormRowView( locale, {
++		// 	labelView: borderRowLabel,
++		// 	children: [
++		// 		borderRowLabel,
++		// 		borderStyleDropdown,
++		// 		borderColorInput,
++		// 		borderWidthInput
++		// 	],
++		// 	class: 'ck-table-form__border-row'
++		// } ) );
+ 
+ 		// Background.
+-		this.children.add( new FormRowView( locale, {
+-			labelView: backgroundRowLabel,
+-			children: [
+-				backgroundRowLabel,
+-				backgroundInput
+-			],
+-			class: 'ck-table-form__background-row'
+-		} ) );
++		// this.children.add( new FormRowView( locale, {
++		// 	labelView: backgroundRowLabel,
++		// 	children: [
++		// 		backgroundRowLabel,
++		// 		backgroundInput
++		// 	],
++		// 	class: 'ck-table-form__background-row'
++		// } ) );
+ 
+ 		// Dimensions row and padding.
+ 		this.children.add( new FormRowView( locale, {
+@@ -356,12 +356,12 @@ export default class TableCellPropertiesView extends View {
+ 					class: 'ck-table-form__dimensions-row'
+ 				} ),
+ 				// Padding row.
+-				new FormRowView( locale, {
+-					children: [
+-						this.paddingInput
+-					],
+-					class: 'ck-table-cell-properties-form__padding-row'
+-				} )
++				// new FormRowView( locale, {
++				// 	children: [
++				// 		this.paddingInput
++				// 	],
++				// 	class: 'ck-table-cell-properties-form__padding-row'
++				// } )
+ 			]
+ 		} ) );
+ 
+@@ -414,13 +414,13 @@ export default class TableCellPropertiesView extends View {
+ 		} );
+ 
+ 		[
+-			this.borderStyleDropdown,
+-			this.borderColorInput,
+-			this.borderWidthInput,
+-			this.backgroundInput,
++			// this.borderStyleDropdown,
++			// this.borderColorInput,
++			// this.borderWidthInput,
++			// this.backgroundInput,
+ 			this.widthInput,
+ 			this.heightInput,
+-			this.paddingInput,
++			// this.paddingInput,
+ 			this.horizontalAlignmentToolbar,
+ 			this.verticalAlignmentToolbar,
+ 			this.saveButtonView,
+@@ -600,14 +600,14 @@ export default class TableCellPropertiesView extends View {
+ 		// -- Label ---------------------------------------------------
+ 
+ 		const dimensionsLabel = new LabelView( locale );
+-		dimensionsLabel.text = t( 'Dimensions' );
++		dimensionsLabel.text = t( '셀 크기' );
+ 
+ 		// -- Width ---------------------------------------------------
+ 
+ 		const widthInput = new LabeledFieldView( locale, createLabeledInputText );
+ 
+ 		widthInput.set( {
+-			label: t( 'Width' ),
++			label: t( '너비' ),
+ 			class: 'ck-table-form__dimensions-row__width'
+ 		} );
+ 
+@@ -636,7 +636,7 @@ export default class TableCellPropertiesView extends View {
+ 		const heightInput = new LabeledFieldView( locale, createLabeledInputText );
+ 
+ 		heightInput.set( {
+-			label: t( 'Height' ),
++			label: t( '높이' ),
+ 			class: 'ck-table-form__dimensions-row__height'
+ 		} );
+ 
+@@ -695,7 +695,7 @@ export default class TableCellPropertiesView extends View {
+ 
+ 		const alignmentLabel = new LabelView( locale );
+ 
+-		alignmentLabel.text = t( 'Table cell text alignment' );
++		alignmentLabel.text = t( '셀 정렬' );
+ 
+ 		// -- Horizontal ---------------------------------------------------
+ 
+@@ -803,16 +803,16 @@ export default class TableCellPropertiesView extends View {
+ 		const locale = this.locale;
+ 		const t = this.t;
+ 
+-		const left = t( 'Align cell text to the left' );
+-		const center = t( 'Align cell text to the center' );
+-		const right = t( 'Align cell text to the right' );
+-		const justify = t( 'Justify cell text' );
++		const left = t( '셀 왼쪽 정렬' );
++		const center = t( '셀 가운데 정렬' );
++		const right = t( '셀 오른쪽 정렬' );
++		// const justify = t( 'Justify cell text' );
+ 
+ 		// Returns object with a proper order of labels.
+ 		if ( locale.uiLanguageDirection === 'rtl' ) {
+-			return { right, center, left, justify };
++			return { right, center, left };
+ 		} else {
+-			return { left, center, right, justify };
++			return { left, center, right };
+ 		}
+ 	}
+ 
+@@ -826,9 +826,9 @@ export default class TableCellPropertiesView extends View {
+ 		const t = this.t;
+ 
+ 		return {
+-			top: t( 'Align cell text to the top' ),
+-			middle: t( 'Align cell text to the middle' ),
+-			bottom: t( 'Align cell text to the bottom' )
++			top: t( '셀 위쪽 정렬' ),
++			middle: t( '셀 가운데 정렬' ),
++			bottom: t( '셀 아래쪽 정렬' )
+ 		};
+ 	}
+ }
+diff --git a/node_modules/@ckeditor/ckeditor5-table/src/tableediting.js b/node_modules/@ckeditor/ckeditor5-table/src/tableediting.js
+index e7ce11f..853088c 100644
+--- a/node_modules/@ckeditor/ckeditor5-table/src/tableediting.js
++++ b/node_modules/@ckeditor/ckeditor5-table/src/tableediting.js
+@@ -78,7 +78,7 @@ export default class TableEditing extends Plugin {
+ 			allowIn: 'tableRow',
+ 			allowAttributes: [ 'colspan', 'rowspan' ],
+ 			isLimit: true,
+-			isSelectable: true
++			isSelectable: true,
+ 		} );
+ 
+ 		// Allow all $block content inside a table cell.
+@@ -89,6 +89,27 @@ export default class TableEditing extends Plugin {
+ 			if ( childDefinition.name == 'table' && Array.from( context.getNames() ).includes( 'table' ) ) {
+ 				return false;
+ 			}
++			else if ( childDefinition.name == 'codeBlock' && Array.from( context.getNames() ).includes( 'table' ) ) {
++				return false;
++			}
++			else if ( childDefinition.name == 'plain' && Array.from( context.getNames() ).includes( 'table' ) ) {
++				return false;
++			}
++			else if ( childDefinition.name == 'blockQuote' && Array.from( context.getNames() ).includes( 'table' ) ) {
++				return false;
++			}
++			else if ( childDefinition.name == 'heading1' && Array.from( context.getNames() ).includes( 'table' ) ) {
++				return false;
++			}
++			else if ( childDefinition.name == 'heading2' && Array.from( context.getNames() ).includes( 'table' ) ) {
++				return false;
++			}
++			else if ( childDefinition.name == 'horizontalLine' && Array.from( context.getNames() ).includes( 'table' ) ) {
++				return false;
++			}
++			else if ( childDefinition.name == 'listItem' && Array.from( context.getNames() ).includes( 'table' ) ) {
++				return false;
++			}
+ 		} );
+ 
+ 		// Table conversion.
+diff --git a/node_modules/@ckeditor/ckeditor5-table/src/tableui.js b/node_modules/@ckeditor/ckeditor5-table/src/tableui.js
+index 59971ab..d46f218 100644
+--- a/node_modules/@ckeditor/ckeditor5-table/src/tableui.js
++++ b/node_modules/@ckeditor/ckeditor5-table/src/tableui.js
+@@ -15,7 +15,7 @@ import Collection from '@ckeditor/ckeditor5-utils/src/collection';
+ 
+ import InsertTableView from './ui/inserttableview';
+ 
+-import tableIcon from './../theme/icons/table.svg';
++import tableIcon from './../theme/icons/my_table.svg';
+ import tableColumnIcon from './../theme/icons/table-column.svg';
+ import tableRowIcon from './../theme/icons/table-row.svg';
+ import tableMergeCellIcon from './../theme/icons/table-merge-cell.svg';
+@@ -51,7 +51,7 @@ export default class TableUI extends Plugin {
+ 			// Decorate dropdown's button.
+ 			dropdownView.buttonView.set( {
+ 				icon: tableIcon,
+-				label: t( 'Insert table' ),
++				label: t( '표' ),
+ 				tooltip: true
+ 			} );
+ 
+@@ -89,7 +89,7 @@ export default class TableUI extends Plugin {
+ 					type: 'switchbutton',
+ 					model: {
+ 						commandName: 'setTableColumnHeader',
+-						label: t( 'Header column' ),
++						label: t( '헤더 열' ),
+ 						bindIsOn: true
+ 					}
+ 				},
+@@ -98,33 +98,26 @@ export default class TableUI extends Plugin {
+ 					type: 'button',
+ 					model: {
+ 						commandName: isContentLtr ? 'insertTableColumnLeft' : 'insertTableColumnRight',
+-						label: t( 'Insert column left' )
++						label: t( '좌측 열 삽입' )
+ 					}
+ 				},
+ 				{
+ 					type: 'button',
+ 					model: {
+ 						commandName: isContentLtr ? 'insertTableColumnRight' : 'insertTableColumnLeft',
+-						label: t( 'Insert column right' )
++						label: t( '우측 열 삽입' )
+ 					}
+ 				},
+ 				{
+ 					type: 'button',
+ 					model: {
+ 						commandName: 'removeTableColumn',
+-						label: t( 'Delete column' )
++						label: t( '열 삭제' )
+ 					}
+ 				},
+-				{
+-					type: 'button',
+-					model: {
+-						commandName: 'selectTableColumn',
+-						label: t( 'Select column' )
+-					}
+-				}
+ 			];
+ 
+-			return this._prepareDropdown( t( 'Column' ), tableColumnIcon, options, locale );
++			return this._prepareDropdown( t( '열' ), tableColumnIcon, options, locale );
+ 		} );
+ 
+ 		editor.ui.componentFactory.add( 'tableRow', locale => {
+@@ -133,7 +126,7 @@ export default class TableUI extends Plugin {
+ 					type: 'switchbutton',
+ 					model: {
+ 						commandName: 'setTableRowHeader',
+-						label: t( 'Header row' ),
++						label: t( '헤더 행' ),
+ 						bindIsOn: true
+ 					}
+ 				},
+@@ -142,33 +135,26 @@ export default class TableUI extends Plugin {
+ 					type: 'button',
+ 					model: {
+ 						commandName: 'insertTableRowAbove',
+-						label: t( 'Insert row above' )
++						label: t( '상단 행 삽입' )
+ 					}
+ 				},
+ 				{
+ 					type: 'button',
+ 					model: {
+ 						commandName: 'insertTableRowBelow',
+-						label: t( 'Insert row below' )
++						label: t( '하단 행 삽입' )
+ 					}
+ 				},
+ 				{
+ 					type: 'button',
+ 					model: {
+ 						commandName: 'removeTableRow',
+-						label: t( 'Delete row' )
++						label: t( '행 삭제' )
+ 					}
+ 				},
+-				{
+-					type: 'button',
+-					model: {
+-						commandName: 'selectTableRow',
+-						label: t( 'Select row' )
+-					}
+-				}
+ 			];
+ 
+-			return this._prepareDropdown( t( 'Row' ), tableRowIcon, options, locale );
++			return this._prepareDropdown( t( '행' ), tableRowIcon, options, locale );
+ 		} );
+ 
+ 		editor.ui.componentFactory.add( 'mergeTableCells', locale => {
+@@ -177,28 +163,28 @@ export default class TableUI extends Plugin {
+ 					type: 'button',
+ 					model: {
+ 						commandName: 'mergeTableCellUp',
+-						label: t( 'Merge cell up' )
++						label: t( '상단 셀 병합' )
+ 					}
+ 				},
+ 				{
+ 					type: 'button',
+ 					model: {
+ 						commandName: isContentLtr ? 'mergeTableCellRight' : 'mergeTableCellLeft',
+-						label: t( 'Merge cell right' )
++						label: t( '우측 셀 병합' )
+ 					}
+ 				},
+ 				{
+ 					type: 'button',
+ 					model: {
+ 						commandName: 'mergeTableCellDown',
+-						label: t( 'Merge cell down' )
++						label: t( '하단 셀 병합' )
+ 					}
+ 				},
+ 				{
+ 					type: 'button',
+ 					model: {
+ 						commandName: isContentLtr ? 'mergeTableCellLeft' : 'mergeTableCellRight',
+-						label: t( 'Merge cell left' )
++						label: t( '좌측 셀 병합' )
+ 					}
+ 				},
+ 				{ type: 'separator' },
+@@ -206,19 +192,19 @@ export default class TableUI extends Plugin {
+ 					type: 'button',
+ 					model: {
+ 						commandName: 'splitTableCellVertically',
+-						label: t( 'Split cell vertically' )
++						label: t( '셀 수직 분할' )
+ 					}
+ 				},
+ 				{
+ 					type: 'button',
+ 					model: {
+ 						commandName: 'splitTableCellHorizontally',
+-						label: t( 'Split cell horizontally' )
++						label: t( '셀 수평 분할' )
+ 					}
+ 				}
+ 			];
+ 
+-			return this._prepareMergeSplitButtonDropdown( t( 'Merge cells' ), tableMergeCellIcon, options, locale );
++			return this._prepareMergeSplitButtonDropdown( t( '셀 병합' ), tableMergeCellIcon, options, locale );
+ 		} );
+ 	}
+ 
+diff --git a/node_modules/@ckeditor/ckeditor5-table/theme/icons/my_table.svg b/node_modules/@ckeditor/ckeditor5-table/theme/icons/my_table.svg
+new file mode 100644
+index 0000000..9cf5a65
+--- /dev/null
++++ b/node_modules/@ckeditor/ckeditor5-table/theme/icons/my_table.svg
+@@ -0,0 +1,12 @@
++<svg class="my-table-svg" xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 20 20">
++  <defs>
++    <style>
++      .table-a {
++        fill: #505050;
++      }
++    </style>
++  </defs>
++  <path class="table-a"
++    d="M719.918,1046.367h16v-3.333h-16Zm10,12.222v-10h-4v10Zm2,0h4v-10h-4Zm-8,0v-10h-4v10Zm-5-17.778h18a1.06,1.06,0,0,1,1,1.111V1059.7a1.06,1.06,0,0,1-1,1.111h-18a1.06,1.06,0,0,1-1-1.111v-17.778A1.06,1.06,0,0,1,718.918,1040.812Z"
++    transform="translate(-717.918 -1040.812)" />
++</svg>
+\ No newline at end of file

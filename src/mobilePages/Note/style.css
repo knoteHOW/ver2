@@ -1,0 +1,452 @@
+@import url(https://fonts.googleapis.com/earlyaccess/notosanskr.css);
+@import url(//spoqa.github.io/spoqa-han-sans/css/SpoqaHanSansNeo.css);
+@import url(https://cdn.jsdelivr.net/gh/moonspam/NanumSquare@1.0/nanumsquare.css);
+@import url('https://cdn.rawgit.com/innks/NanumSquareRound/master/nanumsquareround.min.css');
+@import url("https://cdn.jsdelivr.net/gh/moonspam/NanumBarunGothic@latest/nanumbarungothicsubset.css");
+
+
+:root {
+  --myFont: 'Spoqa Han Sans Neo', 'sans-serif';
+}
+
+/* renderer */
+
+#m-editor-base .ck-editor__top {
+  display: none !important;
+}
+
+#m-editor-base .ck-editor__main {
+  font-family: var(--myFont) !important;
+  border: 0px !important;
+  border-radius: 10px !important;
+  background: #fff !important;
+}
+
+#m-editor-base .ck-content {
+  padding: 0px 16px 16px 16px !important;
+  margin: 0 auto !important;
+  width: 100% !important;
+  border: 0 !important;
+  border-radius: 10px !important;
+}
+
+#m-editor-base .ck-content .ck-widget {
+    outline-offset: -3px !important;
+}
+
+#m-editor-base .ck.ck-editor__editable:not(.ck-editor__nested_editable).ck-focused {
+    box-shadow: none !important;
+}
+
+
+/* text size */
+
+#m-editor-base .h-chapter {
+  margin : 1.25rem 0 !important;
+  border-top: 2px solid #ef0050 !important;
+  border-bottom: 2px solid #ef0050 !important;
+  font-family: var(--myFont) !important;
+  font-size: 1.25rem !important;
+  font-weight: 500 !important;
+  padding: .625rem .3125rem .625rem 5.9375rem !important;
+  box-sizing: border-box !important;
+  position: relative !important;
+}
+
+#m-editor-base .h-chapter::after {
+  content: 'Chapter.';
+  position: absolute;
+  top: .625rem;
+  left: 8px;
+}
+
+#m-editor-base .h-title {
+  margin: 1.25rem .5rem 1.25rem .5rem !important;
+  /* background-color: thistle; */
+  border-bottom: 2px solid #6D6D6D !important;
+  font-family: var(--myFont) !important;
+  font-size: 1.125rem !important;
+  font-weight: bold !important;
+  line-height: 27px !important;
+  padding-top: .625rem !important;
+  padding-bottom: .5rem !important;
+  position: relative;
+  box-sizing: border-box !important;
+}
+
+#m-editor-base .h-title::after {
+  content: '';
+  position: absolute;
+  top: 100%;
+  right: 1.875rem;
+  transform: translate(0, -50%);
+  width: calc(3.125rem + 1.875rem);
+  height: .625rem;
+  padding: 0 1.25rem;
+  background-color: #fff;
+  background-image: url('https://knotehow-image.s3.ap-northeast-2.amazonaws.com/1613641143405.png');
+  background-size: contain;
+  background-repeat: no-repeat;
+  background-position: center center;
+}
+
+#m-editor-base .ck-content p {
+  margin: 0 .5rem .625rem .5rem !important;
+  letter-spacing: 0.32px !important;
+  font-family: var(--myFont) !important;
+  font-size: .9375rem !important;
+  line-height: 1.5625rem !important;
+  color: #000000 !important;
+}
+
+#m-editor-base .ck-content ul, 
+#m-editor-base .ck-content ol {
+  margin: 0 0 .625rem 0 !important;
+  font-family: var(--myFont) !important;
+  font-size: .9375rem !important;
+  line-height: 1.5625rem !important;
+  letter-spacing: 0.32px !important;
+  padding-left: 1.8rem !important;
+}
+
+#m-editor-base .ck-content ul {
+  list-style-type: disc !important;
+}
+
+#m-editor-base .ck-content ul ul,
+#m-editor-base .ck-content ol ol {
+  padding-left: 1.25rem !important;
+  margin-top: .625rem !important;
+}
+
+#m-editor-base .ck-content li ol,
+#m-editor-base .ck-content li ul {
+  padding-left: 1.25rem !important;
+  margin-top: .625rem !important;
+}
+
+#m-editor-base .ck-content li {
+  margin-bottom: .625rem !important;
+}
+
+#m-editor-base .ck-content a {
+  text-decoration: none !important;
+  cursor: pointer;
+  font-family: var(--myFont) !important;
+  font-size: .9375rem !important;
+  line-height: 1.5625rem !important;
+  color: #EF0050 !important;
+  padding-left: .9375rem !important;
+  position: relative !important;
+  transition: box-shadow .3s ease !important;
+  margin-left: .1875rem;
+}
+
+#m-editor-base .ck-content a::after {
+  content: '';
+  position: absolute;
+  top: .5625rem;
+  left: 0;
+  transform: translate(0, -50%);
+  width: .9375rem;
+  height: .9375rem;
+  background-image: url('https://knotehow-image.s3.ap-northeast-2.amazonaws.com/1613640354169.png');
+  background-size: contain;
+  background-repeat: no-repeat;
+}
+
+#m-editor-base .ck-content a:active {
+    box-shadow: inset 0px -1.5px #EF0050;
+}
+
+#m-editor-base .ck-content .ck-horizontal-line {
+  margin: 2.1875rem 0 !important;
+}
+
+#m-editor-base .ck-content hr {
+  position: relative !important;
+  margin: 0 !important;
+  height: 1.875rem !important;
+  background-color: transparent !important;
+}
+
+#m-editor-base .ck-content hr::after {
+  content: '';
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  width: 2.5rem;
+  height: 1.125rem;
+  background-image: url('https://knotehow-image.s3.ap-northeast-2.amazonaws.com/1613641770234.png');
+  background-size: contain;
+  background-repeat: no-repeat;
+  background-color: #fff;
+  background-position: center center;
+  padding: 0 1.875rem;
+}
+
+#m-editor-base .ck-content hr::before {
+  content: '';
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  width: 70%;
+  height: 2px;
+  background-color: #BEBEBE;
+}
+
+#m-editor-base .ck-content .image {
+  margin-top: 1.875rem !important;
+  margin-bottom: 1.875rem !important;
+  padding: .625rem .625rem 0 .625rem !important;
+}
+
+#m-editor-base .ck-content .image > figcaption {
+  background-color: transparent !important;
+  font-family: var(--myFont) !important;
+  font-size: .8125rem !important;
+  font-weight: 600 !important;
+  color: #424242 !important;
+  padding: .625rem !important;
+  margin: 0 .625rem !important;
+  position: relative !important;
+  border: 1px solid transparent !important;
+}
+
+#m-editor-base .ck-content .image > figcaption:focus {
+    /* border: 1px solid rgba(0,0,0,0.7) !important; */
+    border-radius: 5px !important;
+    background-color: rgba(139, 139, 139, 0.1) !important;
+}
+
+#m-editor-base .ck-content figure figcaption .ck-math-widget img {
+    display: inline-block;
+    min-width: 0px !important;
+}
+
+#m-editor-base .ck-content pre {
+  margin: 1.875rem .5rem !important;
+  padding: 1.75rem 1.25rem !important;
+  border: 0 !important;
+  background: #F5F5F5 !important;
+  border-radius: 5px !important;
+}
+
+#m-editor-base .ck-content pre::after {
+    /* display: none !important; */
+    cursor: pointer !important;
+    top: .625rem !important;
+    /* left: 16px !important; */
+    right: 1.125rem !important;
+    width: 5rem !important;
+    text-align: center !important;
+    background: #E8E8E8 !important;
+    border-radius: 2px !important;
+    font-family: var(--myFont) !important;
+    font-size: .625rem !important;
+    line-height: .625rem !important;
+    letter-spacing: 0.22px !important;
+    color: #505050 !important;
+    padding-top: .1875rem !important;
+}
+
+#m-editor-base .ck-content pre:hover::after {
+    display: block !important;
+}
+
+#m-editor-base .ck-content code {
+  font-family: var(--myFont) !important;
+  font-size: .875rem !important;
+  font-weight: normal !important;
+}
+
+#m-editor-base .ck-content blockquote,
+#m-editor-base .ck-content plain {
+  display: block;
+  margin: 1.875rem .5rem !important;
+  border: 0 !important;
+  padding: 1.25rem 1.875rem .625rem 1.875rem !important;
+  background-color: #F5F5F5 !important;
+  border-radius: 10px !important;
+  position: relative !important;
+  letter-spacing: 0.32px !important;
+  font-style: normal !important;
+}
+
+#m-editor-base .ck-content plain {
+  padding-left: 3.125rem !important;
+}
+
+#m-editor-base .ck-content plain::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 1.59375rem;
+  width: 1px;
+  height: 50%;
+  background-color: #000;
+}
+
+#m-editor-base .ck-content plain::after {
+  content: '';
+  position: absolute;
+  top: 50%;
+  left: .75rem;
+  width: 1.8125rem;
+  height: 1.875rem;
+  transform: translate(0, -50%);
+  background-image: url('https://knotehow-image.s3.ap-northeast-2.amazonaws.com/1613709495328.png');
+  background-size: contain;
+  background-repeat: no-repeat;
+  background-color: #F5F5F5;
+}
+
+#m-editor-base .ck-content blockquote::before {
+  content: '';
+  position: absolute;
+  top: .625rem;
+  left: .625rem;
+  width: 1.375rem;
+  height: .75rem;
+  background-image: url('https://knotehow-image.s3.ap-northeast-2.amazonaws.com/1613710900076.png');
+  background-size: contain;
+  background-repeat: no-repeat;
+}
+
+#m-editor-base .ck-content blockquote::after {
+  content: '';
+  position: absolute;
+  bottom: .625rem;
+  right: .625rem;
+  width: 1.375rem;
+  height: .75rem;
+  background-image: url('https://knotehow-image.s3.ap-northeast-2.amazonaws.com/1613710926389.png');
+  background-size: contain;
+  background-repeat: no-repeat;
+}
+
+#m-editor-base .ck-content blockquote > p,
+#m-editor-base .ck-content plain > p {
+  margin: 0 0 .625rem 0 !important;
+  font-family: var(--myFont) !important;
+  font-size: .9375rem !important;
+  font-weight: normal !important;
+  line-height: 1.5625rem !important;
+  letter-spacing: 0.32px !important;
+}
+
+#m-editor-base .ck-content blockquote ul, 
+#m-editor-base .ck-content blockquote ol,
+#m-editor-base .ck-content plain ul,
+#m-editor-base .ck-content plain ol {
+  margin: 0px 0 10px 0 !important;
+  font-family: var(--myFont) !important;
+  font-size: .9375rem !important;
+  font-weight: normal !important;
+  line-height: 1.5625rem !important;
+  letter-spacing: 0.32px !important;
+  padding-left: 1.25rem !important;
+}
+
+#m-editor-base .ck-content blockquote ul ul,
+#m-editor-base .ck-content blockquote ol ol,
+#m-editor-base .ck-content plain ul ul,
+#m-editor-base .ck-content plain ol ol {
+    margin-top: .625rem !important;
+}
+
+#m-editor-base .ck-content blockquote li ol,
+#m-editor-base .ck-content blockquote li ul,
+#m-editor-base .ck-content plain li ol,
+#m-editor-base .ck-content plain li ul {
+    margin-top: .625rem !important;
+}
+
+
+#m-editor-base .ck-content .table {
+  margin: 1.875rem auto !important;
+  padding: .625rem !important;
+}
+
+
+#m-editor-base .ck-content .table table {
+  border-collapse: collapse !important;
+  border-radius: 10px !important;
+  border-style: hidden !important;
+  box-shadow: 0 0 0 2px #E8E8E8 !important;
+  overflow: hidden !important;
+}
+
+#m-editor-base .ck-content .table .ck-widget__selection-handle {
+  top: 0 !important;
+  left: 0 !important;
+}
+
+#m-editor-base .ck-content .table table td,
+#m-editor-base .ck-content .table table th {
+  border: 2px solid #E8E8E8 !important;
+  padding: 0 10px !important;
+}
+
+#m-editor-base .ck-content .table table td {
+  background: #FAFAFA !important;
+}
+
+#m-editor-base .ck-content .table table th {
+  background: #6D6D6D !important;
+}
+
+#m-editor-base .ck-content .table table td.ck-editor__nested-editable:focus {
+  background-color: rgb(198, 228, 255) !important;
+  outline: none !important;
+}
+
+#m-editor-base .ck-content .table table th.ck-editor__nested-editable:focus {
+  background-color: rgb(73, 93, 110) !important;
+  outline: none !important;
+}
+
+#m-editor-base .ck-content .table table td > span,
+#m-editor-base .ck-content .table table td > p {
+  font-family: var(--myFont) !important;
+  font-size: .8125rem !important;
+  margin: .625rem 0 .625rem 0 !important;
+}
+
+#m-editor-base .ck-content .table table th > span,
+#m-editor-base .ck-content .table table th > p {
+  font-family: var(--myFont) !important;
+  font-size: .9375rem !important;
+  color: #FAFAFA !important;
+  margin: .625rem 0 .625rem 0 !important;
+}
+
+#m-editor-base .ck-content .table table td.ck-editor__nested_editable:focus,
+#m-editor-base .ck-content .table table td.ck-editor__nested-editable.ck-editor__nested-editable_focused,
+#m-editor-base .ck-content .table table th.ck-editor__nested-editable:focus
+#m-editor-base .ck-content .table table th.ck-editor__nested-editable.ck-editor__nested-editable_focused {
+  outline: none !important;
+}
+
+#m-editor-base .ck-content .table table .image {
+  margin: 0 !important;
+}
+
+
+#m-editor-base .ck-content .table table .image figcaption {
+  display: none !important;
+}
+
+#m-editor-base .heading1-span {
+  display: inline-block;
+  border: 1px solid black; 
+  padding: 2px .625rem;
+  width: 1.25rem;
+}
+
+#m-editor-base .heading1-span > p {
+  display: inline !important;
+  margin: 0 !important;
+}

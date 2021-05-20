@@ -1,0 +1,46 @@
+input,
+textarea {
+    transition: .3s ease;
+}
+
+input:focus {
+    outline: none !important;
+    box-shadow: 0 0 0 1.5px #EF0050 !important;
+}
+
+textarea:focus {
+    outline: none !important;
+    box-shadow: 0 0 0 1.5px #EF0050 !important;
+}
+
+.ant-select-focused:not(.ant-select-disabled).ant-select:not(.ant-select-customize-input) .ant-select-selector {
+    box-shadow: 0 0 0 1.5px #EF0050 !important;
+}
+
+.ant-select-focused .ant-select-selector {
+    /* border: 1.5px solid #EF0050 !important;
+    outline: none !important; */
+    
+}
+
+.ant-select-selector input:focus {
+    box-shadow: none !important;
+}
+
+.ant-select-selector::before {
+    content: '';
+    position: absolute;
+    top: 50%;
+    right: 4px;
+    transform: translate(0 ,-50%);
+    background-image: url('https://knotehow-image.s3.ap-northeast-2.amazonaws.com/1620111747888.png');
+    background-size: contain;
+    background-repeat: no-repeat;
+    width: 16px;
+    height: 10px;
+}
+
+.ant-select-item-option-selected:not(.ant-select-item-option-disabled) {
+    background-color: #EF0050 !important;
+    color: #FFFFFF !important;
+}

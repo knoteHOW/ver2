@@ -1,0 +1,126 @@
+@import "../../stylesheets/util";
+
+.subscribes-container {
+  .subscribe-list {
+    margin: 0;
+    padding: 0;
+    .row {
+      display: flex;
+      font-size: 15px;
+      font-weight: bold;
+      color: #505050;
+      text-align: center;
+      margin-top: 22px;
+      height: 32px;
+      line-height: 32px;
+
+      .pass-type {
+        width: 342px;
+      }
+
+      .terms {
+        width: 510px;
+      }
+
+      .next-payment-date {
+        width: 116px;
+      }
+
+      .toggle {
+        width: 312px;
+
+        .ant-switch-checked {
+          background-color: #EF0050;
+        }
+      }
+
+      &.list-title {
+        fint-size: 20px;
+        height: 40px;
+        color: #000;
+        padding-bottom: 8px;
+        border-bottom: 1px solid #707070;
+        margin-bottom: 6px;
+      }
+    }
+  }
+
+  .ant-pagination {
+    margin-top: 57px;
+    text-align: center;
+
+    .ant-pagination-item {
+      margin-left: 12px;
+      border: 1.5px solid #E8E8E8;
+      background-color: #FAFAFA;
+      a {
+        color: #6D6D6D;
+      }
+
+      &.ant-pagination-item-0 {
+        margin-left: 0;
+      }
+
+      &.ant-pagination-item-active {
+        background-color: #EF0050;
+        border: 1.5px solid #EF0050;
+
+        a {
+          color: #fff;
+        }
+      }
+    }
+  }
+
+  @include respond-to(mobile) {
+    .subscribe-list {
+      margin: 0 auto;
+      padding: 0;
+      .row {
+        display: grid;
+        grid-template-columns: 200px 120px;
+        grid-template-rows: 47px 19px;
+
+        font-size: 16px;
+        font-weight: bold;
+        text-align: left;
+        margin-top: 22px;
+        height: auto;
+        line-height: 23px;
+
+        padding: 0 5.5vw 25px;
+        border-bottom: 1px solid #E8E8E8;
+
+        .pass-type {
+          width: auto;
+          order: 1;
+        }
+
+        .terms {
+          width: auto;
+          order: 3;
+        }
+
+        .next-payment-date {
+          width: auto;
+          order: 4;
+        }
+
+        .toggle {
+          width: auto;
+          order: 2;
+          display: grid;
+          justify-content: right;
+
+          .ant-switch-checked {
+            background-color: #EF0050;
+          }
+        }
+
+        &.list-title {
+          display: none;
+        }
+      }
+    }
+  }
+}

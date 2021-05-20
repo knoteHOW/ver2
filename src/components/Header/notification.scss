@@ -1,0 +1,35 @@
+.notification-list {
+  .notification-wrap {
+    padding: 16px 16px 9px 16px;
+    border-bottom: 1px solid #E8E8E8;
+    .notification-title-wrap {
+      display: flex;
+      line-height: 22px;
+      padding: 0;
+      .new-obj {
+        font-size: 15px;
+        font-weight: bold;
+        color: #EF0050;
+      }
+
+      .model-name {
+        font-size: 15px;
+        font-weight: 900;
+        color: #505050;
+      }
+
+      .message {
+        font-size: 15px;
+        font-weight: 500;
+        color: #505050;
+      }
+    }
+
+    .created-at {
+      line-height: 15px;
+      font-size: 10px;
+      font-weight: 500;
+      color: #BEBEBE;
+    }
+  }
+}

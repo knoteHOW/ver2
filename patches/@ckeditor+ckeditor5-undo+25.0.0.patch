@@ -1,0 +1,68 @@
+diff --git a/node_modules/@ckeditor/ckeditor5-undo/src/undoui.js b/node_modules/@ckeditor/ckeditor5-undo/src/undoui.js
+index 9dfdf51..793dab5 100644
+--- a/node_modules/@ckeditor/ckeditor5-undo/src/undoui.js
++++ b/node_modules/@ckeditor/ckeditor5-undo/src/undoui.js
+@@ -10,8 +10,8 @@
+ import Plugin from '@ckeditor/ckeditor5-core/src/plugin';
+ import ButtonView from '@ckeditor/ckeditor5-ui/src/button/buttonview';
+ 
+-import undoIcon from '../theme/icons/undo.svg';
+-import redoIcon from '../theme/icons/redo.svg';
++import undoIcon from '../theme/icons/my_undo.svg';
++import redoIcon from '../theme/icons/my_redo.svg';
+ 
+ /**
+  * The undo UI feature. It introduces the `'undo'` and `'redo'` buttons to the editor.
+@@ -30,8 +30,8 @@ export default class UndoUI extends Plugin {
+ 		const localizedUndoIcon = locale.uiLanguageDirection == 'ltr' ? undoIcon : redoIcon;
+ 		const localizedRedoIcon = locale.uiLanguageDirection == 'ltr' ? redoIcon : undoIcon;
+ 
+-		this._addButton( 'undo', t( 'Undo' ), 'CTRL+Z', localizedUndoIcon );
+-		this._addButton( 'redo', t( 'Redo' ), 'CTRL+Y', localizedRedoIcon );
++		this._addButton( 'undo', t( '뒤로가기' ), 'CTRL+Z', localizedUndoIcon );
++		this._addButton( 'redo', t( '앞으로가기' ), 'CTRL+Y', localizedRedoIcon );
+ 	}
+ 
+ 	/**
+diff --git a/node_modules/@ckeditor/ckeditor5-undo/theme/icons/my_redo.svg b/node_modules/@ckeditor/ckeditor5-undo/theme/icons/my_redo.svg
+new file mode 100644
+index 0000000..91f6aed
+--- /dev/null
++++ b/node_modules/@ckeditor/ckeditor5-undo/theme/icons/my_redo.svg
+@@ -0,0 +1,14 @@
++<svg class="my-redo-svg" xmlns="http://www.w3.org/2000/svg" width="19.943" height="13.891" viewBox="0 0 19.943 13.891">
++  <defs>
++    <style>
++      .redo-a {
++        fill: #505050;
++      }
++    </style>
++  </defs>
++  <g transform="translate(0.001 0.001)">
++    <path class="redo-a"
++      d="M16.577,140.082a1.2,1.2,0,0,1-1.712-1.692l.956-.967H6.106a3.7,3.7,0,0,0-3.7,3.7v.1a3.674,3.674,0,0,0,1.083,2.615,1.2,1.2,0,0,1-1.7,1.7A6.065,6.065,0,0,1,0,141.22v-.1a6.106,6.106,0,0,1,6.106-6.105h9.743l-.969-.957a1.2,1.2,0,1,1,1.692-1.712l3.014,2.978a1.2,1.2,0,0,1,.01,1.7Z"
++      transform="translate(-0.001 -132)" />
++  </g>
++</svg>
+\ No newline at end of file
+diff --git a/node_modules/@ckeditor/ckeditor5-undo/theme/icons/my_undo.svg b/node_modules/@ckeditor/ckeditor5-undo/theme/icons/my_undo.svg
+new file mode 100644
+index 0000000..35700a7
+--- /dev/null
++++ b/node_modules/@ckeditor/ckeditor5-undo/theme/icons/my_undo.svg
+@@ -0,0 +1,14 @@
++<svg class="my-undo-svg" xmlns="http://www.w3.org/2000/svg" width="19.943" height="13.891" viewBox="0 0 19.943 13.891">
++  <defs>
++    <style>
++      .undo-a {
++        fill: #505050;
++      }
++    </style>
++  </defs>
++  <g transform="translate(0 -131.999)">
++    <path class="undo-a"
++      d="M3.366,140.082a1.2,1.2,0,0,0,1.712-1.692l-.956-.967h9.715a3.7,3.7,0,0,1,3.7,3.7v.1a3.674,3.674,0,0,1-1.083,2.615,1.2,1.2,0,1,0,1.7,1.7,6.066,6.066,0,0,0,1.788-4.317v-.1a6.106,6.106,0,0,0-6.106-6.106H4.1l.969-.957a1.2,1.2,0,1,0-1.692-1.712L.358,135.325a1.2,1.2,0,0,0-.01,1.7Z"
++      transform="translate(0)" />
++  </g>
++</svg>
+\ No newline at end of file

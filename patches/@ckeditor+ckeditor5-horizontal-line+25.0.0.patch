@@ -1,0 +1,125 @@
+diff --git a/node_modules/@ckeditor/ckeditor5-horizontal-line/.DS_Store b/node_modules/@ckeditor/ckeditor5-horizontal-line/.DS_Store
+new file mode 100644
+index 0000000..e69de29
+diff --git a/node_modules/@ckeditor/ckeditor5-horizontal-line/src/horizontallineui.js b/node_modules/@ckeditor/ckeditor5-horizontal-line/src/horizontallineui.js
+index 46d481e..590217c 100644
+--- a/node_modules/@ckeditor/ckeditor5-horizontal-line/src/horizontallineui.js
++++ b/node_modules/@ckeditor/ckeditor5-horizontal-line/src/horizontallineui.js
+@@ -9,7 +9,7 @@
+ 
+ import Plugin from '@ckeditor/ckeditor5-core/src/plugin';
+ import ButtonView from '@ckeditor/ckeditor5-ui/src/button/buttonview';
+-import horizontalLineIcon from '../theme/icons/horizontalline.svg';
++import horizontalLineIcon from '../theme/icons/my_horizontalline.svg';
+ 
+ /**
+  * The horizontal line UI plugin.
+@@ -27,7 +27,7 @@ export default class HorizontalLineUI extends Plugin {
+ 			const view = new ButtonView( locale );
+ 
+ 			view.set( {
+-				label: t( 'Horizontal line' ),
++				label: t( '수평선' ),
+ 				icon: horizontalLineIcon,
+ 				tooltip: true
+ 			} );
+diff --git a/node_modules/@ckeditor/ckeditor5-horizontal-line/theme/icons/my_horizontalline.svg b/node_modules/@ckeditor/ckeditor5-horizontal-line/theme/icons/my_horizontalline.svg
+new file mode 100644
+index 0000000..4a6d0ab
+--- /dev/null
++++ b/node_modules/@ckeditor/ckeditor5-horizontal-line/theme/icons/my_horizontalline.svg
+@@ -0,0 +1,93 @@
++<svg class="my-horizon-svg" xmlns="http://www.w3.org/2000/svg" width="25.5" height="21.461" viewBox="0 0 25.5 21.461">
++  <defs>
++    <style>
++      .horizon-a {
++        fill: none;
++        stroke: #505050;
++        stroke-linecap: round;
++        stroke-width: 1.5px;
++      }
++
++      .horizon-b {
++        opacity: 0.8;
++      }
++
++      .horizon-c {
++        fill: #1d1d1b;
++      }
++
++      .horizon-d {
++        fill: #ef0050;
++      }
++    </style>
++  </defs>
++  <g transform="translate(-19.25 -5.25)">
++    <line class="horizon-a" x2="24" transform="translate(20 6)" />
++    <line class="horizon-a" x2="24" transform="translate(20 25.961)" />
++    <g class="horizon-b" transform="translate(20 8)">
++      <g transform="translate(0 0)">
++        <path class="horizon-c"
++          d="M63.238,131.682h1.611v3.981l1.246-1.535h1.823l-1.594,1.84,1.636,2.747H66.189l-.924-1.56-.416.483v1.077H63.238Z"
++          transform="translate(-63.214 -131.682)" />
++        <g transform="translate(0 8.515)">
++          <path class="horizon-c" d="M62.866,266.463h1.775v2.4h2.278v-2.4h1.775v6.4H66.919v-2.433H64.641v2.433H62.866Z"
++            transform="translate(-62.866 -266.335)" />
++          <path class="horizon-c"
++            d="M167.969,267.816V267.8a3.451,3.451,0,0,1,6.9-.019v.019a3.451,3.451,0,0,1-6.9.018Zm5.086,0V267.8a1.664,1.664,0,0,0-1.647-1.729,1.632,1.632,0,0,0-1.619,1.711v.019a1.663,1.663,0,0,0,1.638,1.729A1.634,1.634,0,0,0,173.055,267.816Z"
++            transform="translate(-161.229 -264.468)" />
++          <path class="horizon-c"
++            d="M277.492,266.191h1.875l1.116,3.7,1.235-3.723h1.528l1.235,3.723,1.116-3.7h1.839l-2.141,6.45H283.75l-1.29-3.687-1.281,3.687h-1.546Z"
++            transform="translate(-263.729 -266.063)" />
++        </g>
++      </g>
++      <g transform="translate(5.136 0.291)">
++        <g transform="translate(0 2.053)">
++          <path class="horizon-d"
++            d="M142.96,168.341h1.611v.644a1.7,1.7,0,0,1,1.374-.746,1.5,1.5,0,0,1,1.56,1.687v3h-1.611v-2.484c0-.5-.263-.772-.644-.772a.679.679,0,0,0-.678.772v2.484H142.96Z"
++            transform="translate(-142.96 -168.239)" />
++          <path class="horizon-d"
++            d="M223.868,170.655v-.017a2.54,2.54,0,0,1,5.07-.017v.017a2.54,2.54,0,0,1-5.07.017Zm3.5,0v-.017a.994.994,0,0,0-.975-1.034.961.961,0,0,0-.958,1.018v.017a.994.994,0,0,0,.975,1.034A.961.961,0,0,0,227.37,170.655Z"
++            transform="translate(-218.68 -168.239)" />
++          <path class="horizon-d"
++            d="M311.968,169.827v1.3H310.9v1.552c0,.322.144.458.441.458a1.4,1.4,0,0,0,.61-.153v1.264a2.292,2.292,0,0,1-1.119.263,1.344,1.344,0,0,1-1.543-1.517v-1.865h-.543v-1.3Z"
++            transform="translate(-298.115 -169.725)" />
++          <path class="horizon-d"
++            d="M364.94,170.655v-.017a2.3,2.3,0,0,1,2.315-2.4,2.258,2.258,0,0,1,2.315,2.51c0,.1,0,.22-.009.33h-3.069a.947.947,0,0,0,.992.755,1.386,1.386,0,0,0,1.017-.466l.89.738a2.4,2.4,0,0,1-1.992.933A2.309,2.309,0,0,1,364.94,170.655Zm3.12-.4c-.059-.509-.356-.831-.8-.831-.424,0-.712.331-.8.831Z"
++            transform="translate(-350.705 -168.239)" />
++        </g>
++        <g transform="translate(1.544 0)">
++          <path class="horizon-d"
++            d="M179.8,138.225h-.9l.115-.23a1.389,1.389,0,0,0,.13-.611,1.176,1.176,0,0,0-.227-.761l-.1-.108.1-.108a.526.526,0,0,1,.386-.187c.391,0,.7.512.7,1.164a1.724,1.724,0,0,1-.162.753Zm-.406-.318h.2a1.483,1.483,0,0,0,.09-.523c0-.528-.242-.9-.427-.838a1.64,1.64,0,0,1,.207.838A1.851,1.851,0,0,1,179.392,137.908Z"
++            transform="translate(-178.065 -136.22)" />
++          <path class="horizon-d"
++            d="M167.893,137.293h-.859l.025-.181c.073-.533.346-.892.678-.892a.525.525,0,0,1,.386.187l.1.108-.1.108a1.01,1.01,0,0,0-.211.533Zm-.483-.318h.211a1.393,1.393,0,0,1,.164-.428C167.661,136.5,167.494,136.658,167.41,136.975Z"
++            transform="translate(-167.034 -136.22)" />
++          <g transform="translate(4.905)">
++            <path class="horizon-d"
++              d="M256.291,138.225h-.9l.115-.23a1.391,1.391,0,0,0,.13-.611,1.176,1.176,0,0,0-.227-.761l-.1-.108.1-.108a.525.525,0,0,1,.386-.187c.391,0,.7.512.7,1.164a1.719,1.719,0,0,1-.162.753Zm-.406-.318h.2a1.48,1.48,0,0,0,.09-.523c0-.528-.243-.9-.427-.838a1.639,1.639,0,0,1,.207.838A1.852,1.852,0,0,1,255.885,137.908Z"
++              transform="translate(-254.558 -136.22)" />
++            <path class="horizon-d"
++              d="M244.385,137.293h-.859l.025-.181c.073-.533.346-.892.678-.892a.525.525,0,0,1,.386.187l.1.108-.1.108a1.01,1.01,0,0,0-.211.533Zm-.483-.318h.211a1.4,1.4,0,0,1,.164-.428C244.153,136.5,243.986,136.658,243.9,136.975Z"
++              transform="translate(-243.526 -136.22)" />
++          </g>
++          <g transform="translate(9.811)">
++            <path class="horizon-d"
++              d="M332.784,138.225h-.9L332,138a1.39,1.39,0,0,0,.13-.611,1.177,1.177,0,0,0-.227-.761l-.1-.108.1-.108a.525.525,0,0,1,.386-.187c.391,0,.7.512.7,1.164a1.719,1.719,0,0,1-.162.753Zm-.406-.318h.2a1.478,1.478,0,0,0,.09-.523c0-.528-.244-.9-.427-.838a1.64,1.64,0,0,1,.207.838A1.854,1.854,0,0,1,332.378,137.908Z"
++              transform="translate(-331.051 -136.22)" />
++            <path class="horizon-d"
++              d="M320.878,137.293h-.859l.025-.181c.073-.533.346-.892.678-.892a.527.527,0,0,1,.386.187l.1.108-.1.108a1.007,1.007,0,0,0-.211.533Zm-.483-.318h.211a1.4,1.4,0,0,1,.164-.428C320.649,136.5,320.48,136.658,320.395,136.975Z"
++              transform="translate(-320.019 -136.22)" />
++          </g>
++          <g transform="translate(14.715)">
++            <path class="horizon-d"
++              d="M409.269,138.225h-.9l.115-.23a1.4,1.4,0,0,0,.13-.612,1.176,1.176,0,0,0-.227-.761l-.1-.108.1-.108a.526.526,0,0,1,.386-.187c.391,0,.7.512.7,1.164a1.719,1.719,0,0,1-.162.753Zm-.406-.318h.2a1.481,1.481,0,0,0,.09-.523c0-.528-.241-.908-.427-.837a1.636,1.636,0,0,1,.207.837A1.855,1.855,0,0,1,408.862,137.908Z"
++              transform="translate(-407.535 -136.22)" />
++            <path class="horizon-d"
++              d="M397.366,137.293h-.859l.025-.181c.073-.533.346-.892.678-.892a.525.525,0,0,1,.386.187l.1.108-.1.108a1.014,1.014,0,0,0-.21.533Zm-.484-.318h.212a1.384,1.384,0,0,1,.164-.428C397.135,136.5,396.968,136.658,396.883,136.975Z"
++              transform="translate(-396.507 -136.22)" />
++          </g>
++        </g>
++      </g>
++    </g>
++  </g>
++</svg>
+\ No newline at end of file

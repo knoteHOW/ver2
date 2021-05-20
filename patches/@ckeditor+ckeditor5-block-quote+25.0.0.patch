@@ -1,0 +1,88 @@
+diff --git a/node_modules/@ckeditor/ckeditor5-block-quote/.DS_Store b/node_modules/@ckeditor/ckeditor5-block-quote/.DS_Store
+new file mode 100644
+index 0000000..e69de29
+diff --git a/node_modules/@ckeditor/ckeditor5-block-quote/src/blockquoteediting.js b/node_modules/@ckeditor/ckeditor5-block-quote/src/blockquoteediting.js
+index 2854a11..24ee2f7 100644
+--- a/node_modules/@ckeditor/ckeditor5-block-quote/src/blockquoteediting.js
++++ b/node_modules/@ckeditor/ckeditor5-block-quote/src/blockquoteediting.js
+@@ -41,13 +41,32 @@ export default class BlockQuoteEditing extends Plugin {
+ 			allowContentOf: '$root'
+ 		} );
+ 
+-		// Disallow blockQuote in blockQuote.
++
+ 		schema.addChildCheck( ( ctx, childDef ) => {
+-			if ( ctx.endsWith( 'blockQuote' ) && childDef.name == 'blockQuote' ) {
++			if ( ctx.endsWith( 'blockQuote' ) && childDef.name == 'plain' ) {
++				return false;
++			}
++			else if ( ctx.endsWith( 'blockQuote' ) && childDef.name == 'blockQuote' ) {
++				return false;
++			}
++			else if ( ctx.endsWith( 'blockQuote' ) && childDef.name == 'table' ) {
++				return false;
++			}
++			else if ( ctx.endsWith( 'blockQuote' ) && childDef.name == 'codeBlock' ) {
++				return false;
++			}
++			else if ( ctx.endsWith( 'blockQuote' ) && childDef.name == 'horizontalLine' ) {
++				return false;
++			}
++			else if ( ctx.endsWith( 'blockQuote' ) && childDef.name == 'heading1' ) {
++				return false;
++			}
++			else if ( ctx.endsWith( 'blockQuote' ) && childDef.name == 'heading2' ) {
+ 				return false;
+ 			}
+ 		} );
+ 
++
+ 		editor.conversion.elementToElement( { model: 'blockQuote', view: 'blockquote' } );
+ 
+ 		// Postfixer which cleans incorrect model states connected with block quotes.
+diff --git a/node_modules/@ckeditor/ckeditor5-block-quote/src/blockquoteui.js b/node_modules/@ckeditor/ckeditor5-block-quote/src/blockquoteui.js
+index 8cf0a5c..01b04d8 100644
+--- a/node_modules/@ckeditor/ckeditor5-block-quote/src/blockquoteui.js
++++ b/node_modules/@ckeditor/ckeditor5-block-quote/src/blockquoteui.js
+@@ -10,7 +10,7 @@
+ import Plugin from '@ckeditor/ckeditor5-core/src/plugin';
+ import ButtonView from '@ckeditor/ckeditor5-ui/src/button/buttonview';
+ 
+-import quoteIcon from '@ckeditor/ckeditor5-core/theme/icons/quote.svg';
++import quoteIcon from '../theme/icons/my_blockquote.svg';
+ import '../theme/blockquote.css';
+ 
+ /**
+@@ -33,7 +33,7 @@ export default class BlockQuoteUI extends Plugin {
+ 			const buttonView = new ButtonView( locale );
+ 
+ 			buttonView.set( {
+-				label: t( 'Block quote' ),
++				label: t( '인용' ),
+ 				icon: quoteIcon,
+ 				tooltip: true,
+ 				isToggleable: true
+diff --git a/node_modules/@ckeditor/ckeditor5-block-quote/theme/icons/my_blockquote.svg b/node_modules/@ckeditor/ckeditor5-block-quote/theme/icons/my_blockquote.svg
+new file mode 100644
+index 0000000..2ca53d8
+--- /dev/null
++++ b/node_modules/@ckeditor/ckeditor5-block-quote/theme/icons/my_blockquote.svg
+@@ -0,0 +1,17 @@
++<svg class="my-blockquote-svg" xmlns="http://www.w3.org/2000/svg" width="23.999" height="17.001" viewBox="0 0 23.999 17.001">
++  <defs>
++    <style>
++      .quote-a {
++        fill: #505050;
++      }
++    </style>
++  </defs>
++  <g transform="translate(1 2)">
++    <path class="quote-a"
++      d="M36.875,393.483l-.032-.033a5.23,5.23,0,0,0-3.777-1.586A5.137,5.137,0,0,0,28.2,395.2a4.755,4.755,0,0,0-.279,1.607,4.846,4.846,0,0,0,1.637,3.615l0,0a5.242,5.242,0,0,0,3.506,1.325c.063,0,.126,0,.187,0q-.482,1.671-3.132,3.094c.183.017.366.025.55.025a7.437,7.437,0,0,0,5.393-2.372,7.28,7.28,0,0,0,2.373-5.244A5.169,5.169,0,0,0,36.875,393.483Z"
++      transform="translate(-15.438 -389.863)" />
++    <path class="quote-a"
++      d="M55.186,403.245l.032.033A5.232,5.232,0,0,0,59,404.864a5.137,5.137,0,0,0,4.869-3.334,4.744,4.744,0,0,0,.279-1.607,4.844,4.844,0,0,0-1.637-3.615l0,0A5.243,5.243,0,0,0,59,394.98c-.063,0-.126,0-.188,0q.482-1.671,3.133-3.094c-.183-.017-.366-.025-.55-.025A7.437,7.437,0,0,0,56,394.236a7.279,7.279,0,0,0-2.374,5.244A5.168,5.168,0,0,0,55.186,403.245Z"
++      transform="translate(-54.624 -393.864)" />
++  </g>
++</svg>
+\ No newline at end of file

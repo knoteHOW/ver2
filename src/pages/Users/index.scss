@@ -1,0 +1,83 @@
+@import "../../stylesheets/util";
+
+.login-container {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  min-height: 1080px;
+
+  .btn-wrapper {
+    .content {
+      width: 376px;
+      margin: 0 auto;
+      padding-top: 136px;
+
+      .logo {
+        width: 145px;
+      }
+
+      .page-num {
+        margin-top: 202px;
+      }
+
+      .title {
+        margin-top: 24px;
+        font-size: 40px;
+        line-height: 50px;
+        color: #212121;
+        font-weight: bold;
+        letter-spacing: -0.2px;
+      }
+
+      button {
+        margin-top: 140px;
+      }
+    }
+  }
+
+  .img-wrapper {
+    background-size: cover;
+    background-position: center;
+
+    &.step1 {
+      background-image: url("../../img/users/login_1step.png");
+    }
+  }
+
+  @include respond-to(mobile) {
+    display: block;
+    min-height: unset;
+
+    .btn-wrapper {
+      .content {
+        width: 88.9vw;
+        margin: 0 auto;
+        padding-top: 236px;
+
+        .logo {
+          width: 145px;
+        }
+
+        .page-num {
+          margin-top: 202px;
+        }
+
+        .title {
+          margin-top: 24px;
+          font-size: 40px;
+          line-height: 50px;
+          color: #212121;
+          font-weight: bold;
+          letter-spacing: -0.2px;
+        }
+
+        button {
+          margin-top: 140px;
+        }
+      }
+    }
+
+    .img-wrapper {
+      display: none;
+    }
+  }
+}

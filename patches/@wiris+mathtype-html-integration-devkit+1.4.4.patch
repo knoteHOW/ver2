@@ -1,0 +1,284 @@
+diff --git a/node_modules/@wiris/mathtype-html-integration-devkit/src/contentmanager.js b/node_modules/@wiris/mathtype-html-integration-devkit/src/contentmanager.js
+index 677124c..afa44f1 100644
+--- a/node_modules/@wiris/mathtype-html-integration-devkit/src/contentmanager.js
++++ b/node_modules/@wiris/mathtype-html-integration-devkit/src/contentmanager.js
+@@ -492,7 +492,7 @@ export default class ContentManager {
+    * @returns {String} - Toolbar identifier.
+    */
+   getToolbar() {
+-    let toolbar = 'general';
++    let toolbar = "<toolbar removeLinks='true'><tab name='일반'><section><item ref='fraction'/><item ref='autoDisplayBevelledFraction'/><item ref='squareRoot'/><item ref='nRoot'/></section><section><item ref='superscript'/><item ref='subscript'/></section><section><item ref='parenthesis'/><item ref='verticalBar'/><item ref='squareBracket'/><item ref='curlyBracket'/></section><section rows='3'><item ref='+'/><item ref='&#215;'/><item ref='-'/><item ref='/'/><item ref='&#177;'/><item ref='&#247;'/></section><section rows='3'><item ref='&#8805;'/><item ref='&#8712;'/><item ref='&#8746;'/><item ref='&#8804;'/><item ref='&#8834;'/><item ref='&#8745;'/></section><section rows='3'><item ref='&#8709;'/><item ref='&#8734;'/><item ref='numberPi'/></section><section rows='3'><item ref='bold'/><item ref='italic'/><item ref='autoItalic'/></section></tab><tab name='연산자'><section rows='3'><item ref='+'/><item ref='-'/><item ref='&#177;'/><item ref='&#215;'/><item ref='&#247;'/><item ref='&#8723;'/><item ref='&#183;'/><item ref='&#8728;'/><item ref='*'/><item ref='/'/><item ref='\\'/><item ref='&#8726;'/></section><section rows='3'><item ref='numberPi'/><item ref='&#8734;'/><item ref='&#8709;'/><item ref='&#8240;'/><item ref='&#8710;'/><item ref='&#8711;'/><item ref='&#176;'/><item ref='&apos;'/><item ref='aposApos'/><item ref='triplePrime'/><item ref='quadruplePrime'/><item ref='&#8245;'/></section><section rows='3'><item ref='='/><item ref='&#8764;'/><item ref='&#8771;'/><item ref='&#8801;'/><item ref='&#8776;'/><item ref='&#8773;'/><item ref='&#8800;'/><item ref='&#8802;'/><item ref='&#8769;'/><item ref='&#8777;'/><item ref='&#8756;'/><item ref='&#8757;'/></section><section rows='3'><item ref='&gt;'/><item ref='&#8805;'/><item ref='&#10878;'/><item ref='&lt;'/><item ref='&#8804;'/><item ref='&#10877;'/><item ref='&#10888;'/><item ref='&#8811;'/><item ref='&#8827;'/><item ref='&#10887;'/><item ref='&#8810;'/><item ref='&#8826;'/><item ref='&#8733;'/><item ref='&#8883;'/><item ref='&#8882;'/></section><section rows='3'><item ref='&#8712;'/><item ref='&#8715;'/><item ref='&#8746;'/><item ref='&#8745;'/><item ref='&#8834;'/><item ref='&#8835;'/><item ref='&#8713;'/><item ref='&#8716;'/><item ref='&#8838;'/><item ref='&#8839;'/><item ref='&#8847;'/><item ref='&#8848;'/><item ref='&#8849;'/><item ref='&#8850;'/><item ref='&#8851;'/><item ref='&#8852;'/><item ref='&#8707;'/><item ref='&#8708;'/><item ref='&#8743;'/><item ref='&#8744;'/></section><section rows='3'><item ref='&#8736;'/><item ref='&#8737;'/><item ref='&#8738;'/><item ref='&#8704;'/><item ref='&#8741;'/><item ref='&#8742;'/><item ref='&#8869;'/><item ref='&#172;'/><item ref='&#8900;'/></section><section rows='3'><item ref='&#8942;'/><item ref='&#8230;'/><item ref='&#8943;'/><item ref='&#8944;'/><item ref='&#8945;'/><item ref='&#8208;'/><item ref='normalDash'/><item ref='&#8212;'/></section></tab><tab name='큰 연산자'><section><item ref='sumUnderover'/><item ref='sumUnder'/><item ref='sumSubsuperscript'/><item ref='sumSubscript'/></section><section><item ref='productUnderover'/><item ref='productUnder'/><item ref='productSubsuperscript'/><item ref='productSubscript'/><item ref='exponential'/></section><section><item ref='bigCap'/><item ref='bigCup'/><item ref='bigSqCap'/><item ref='bigSqCup'/><item ref='bigProd'/><item ref='bigCoProd'/><item ref='bigSum'/></section></tab><tab name='화살표, 수식'><section rows='3'><item ref='&#8592;'/><item ref='&#8594;'/><item ref='&#8596;'/><item ref='&#8656;'/><item ref='&#8658;'/><item ref='&#8660;'/><item ref='&#8612;'/><item ref='&#8614;'/><item ref='&#8599;'/><item ref='&#8600;'/><item ref='&#8598;'/><item ref='&#8601;'/><item ref='&#10529;'/><item ref='&#10530;'/><item ref='&#8617;'/><item ref='&#8618;'/><item ref='&#8636;'/><item ref='&#8640;'/><item ref='&#8593;'/><item ref='&#8595;'/><item ref='&#8657;'/><item ref='&#8659;'/><item ref='&#10602;'/><item ref='&#10605;'/><item ref='&#8651;'/><item ref='&#8652;'/><item ref='&#8637;'/><item ref='&#8641;'/><item ref='&#8646;'/><item ref='&#8644;'/><item ref='&#8645;'/><item ref='&#8693;'/><item ref='&#10606;'/><item ref='&#10607;'/><item ref='&#10562;'/><item ref='&#10564;'/><item ref='&#8597;'/><item ref='&#8661;'/><item ref='&#8629;'/></section><section><item ref='rightArrowWithOverScript'/><item ref='rightArrowWithUnderScript'/><item ref='rightArrowWithUnderAndOverScript'/><item ref='leftArrowWithOverScript'/><item ref='leftArrowWithUnderScript'/><item ref='leftArrowWithUnderAndOverScript'/><item ref='rightLeftArrowWithOverScript'/><item ref='rightLeftArrowWithUnderScript'/><item ref='rightLeftArrowWithUnderAndOverScript'/><item ref='leftArrowOverRightArrowWithOverScript'/><item ref='leftArrowOverRightArrowWithUnderScript'/><item ref='leftArrowOverRightArrowWithUnderAndOverScript'/><item ref='rightArrowOverLeftArrowWithOverScript'/><item ref='rightArrowOverLeftArrowWithUnderScript'/><item ref='rightArrowOverLeftArrowWithUnderAndOverScript'/><item ref='leftHarpoonOverRightHarpoonWithOverScript'/><item ref='leftHarpoonOverRightHarpoonWithUnderScript'/><item ref='leftHarpoonOverRightHarpoonWithUnderAndOverScript'/><item ref='rightHarpoonOverLeftHarpoonWithOverScript'/><item ref='rightHarpoonOverLeftHarpoonWithUnderScript'/><item ref='rightHarpoonOverLeftHarpoonWithUnderAndOverScript'/></section><section><item ref='rightArrowOverShortLeftWithOverScript'/><item ref='rightArrowOverShortLeftWithUnderScript'/><item ref='rightArrowOverShortLeftWithUnderAndOverScript'/><item ref='shortRightArrowOverLeftWithOverScript'/><item ref='shortRightArrowOverLeftWithUnderScript'/><item ref='shortRightArrowOverLeftWithUnderAndOverScript'/></section><section><item ref='vectorAccent'/><item ref='rightArrowAccent'/><item ref='rightLeftArrowAccent'/></section><section rows='3'><item ref='tilde'/><item ref='diaeresis'/><item ref='dotAccent'/></section><section><item ref='parenthesis'/><item ref='squareBracket'/><item ref='verticalBar'/><item ref='doubleVerticalBar'/><item ref='angleBrackets'/><item ref='curlyBracket'/><item ref='openParenthesis'/><item ref='closeParenthesis'/><item ref='openSquareBracket'/><item ref='closeSquareBracket'/><item ref='openVerticalBar'/><item ref='closeVerticalBar'/><item ref='openDoubleVerticalBar'/><item ref='closeDoubleVerticalBar'/><item ref='openAngleBracket'/><item ref='closeAngleBracket'/><item ref='openCurlyBracket'/><item ref='closeCurlyBracket'/><item ref='floor'/><item ref='ceiling'/></section><section><item ref='upCurlyBracket'/><item ref='downCurlyBracket'/><item ref='overScriptWithBrace'/><item ref='underScriptWithBrace'/><item ref='upParenthesis'/><item ref='downParenthesis'/><item ref='encloseTop'/><item ref='encloseBottom'/><item ref='encloseLeft'/><item ref='encloseRight'/><item ref='encloseBox'/><item ref='encloseActuarial'/><item ref='encloseRoundedBox'/><item ref='upDiagonalStrike'/><item ref='downDiagonalStrike'/><item ref='horizontalStrike'/><item ref='upAndDownDiagonalStrike'/><item ref='verticalStrike'/><item ref='horizontalAndVerticalStrike'/><item ref='encloseLongDivision'/></section></tab><tab ref='greek'><removeItem ref='arabicIndicNumbers'/><removeItem ref='easternArabicIndicNumbers'/><removeItem ref='&#8465;'/><removeItem ref='&#8476;'/><removeItem ref='ell'/><removeItem ref='&#8501;'/><removeItem ref='&#8472;'/><removeItem ref='&#8497;'/><removeItem ref='&#8466;'/><removeItem ref='zTransform'/><removeItem ref='frakturCapitalA'/><removeItem ref='frakturCapitalB'/><removeItem ref='frakturCapitalC'/><removeItem ref='frakturCapitalA'/><removeItem ref='frakturCapitalB'/><removeItem ref='frakturCapitalC'/><removeItem ref='frakturCapitalD'/><removeItem ref='frakturCapitalE'/><removeItem ref='frakturCapitalF'/><removeItem ref='frakturCapitalG'/><removeItem ref='frakturCapitalH'/><removeItem ref='frakturCapitalI'/><removeItem ref='frakturCapitalJ'/><removeItem ref='frakturCapitalK'/><removeItem ref='frakturCapitalL'/><removeItem ref='frakturCapitalM'/><removeItem ref='frakturCapitalN'/><removeItem ref='frakturCapitalO'/><removeItem ref='frakturCapitalP'/><removeItem ref='frakturCapitalQ'/><removeItem ref='frakturCapitalR'/><removeItem ref='frakturCapitalS'/><removeItem ref='frakturCapitalT'/><removeItem ref='frakturCapitalU'/><removeItem ref='frakturCapitalV'/><removeItem ref='frakturCapitalW'/><removeItem ref='frakturCapitalX'/><removeItem ref='frakturCapitalY'/><removeItem ref='frakturCapitalZ'/><removeItem ref='frakturA'/><removeItem ref='frakturB'/><removeItem ref='frakturC'/><removeItem ref='frakturD'/><removeItem ref='frakturE'/><removeItem ref='frakturF'/><removeItem ref='frakturG'/><removeItem ref='frakturH'/><removeItem ref='frakturI'/><removeItem ref='frakturJ'/><removeItem ref='frakturK'/><removeItem ref='frakturL'/><removeItem ref='frakturM'/><removeItem ref='frakturN'/><removeItem ref='frakturO'/><removeItem ref='frakturP'/><removeItem ref='frakturQ'/><removeItem ref='frakturR'/><removeItem ref='frakturS'/><removeItem ref='frakturT'/><removeItem ref='frakturU'/><removeItem ref='frakturV'/><removeItem ref='frakturW'/><removeItem ref='frakturX'/><removeItem ref='frakturY'/><removeItem ref='frakturZ'/><removeItem ref='scriptCapitalA'/><removeItem ref='scriptCapitalB'/><removeItem ref='scriptCapitalC'/><removeItem ref='scriptCapitalA'/><removeItem ref='scriptCapitalB'/><removeItem ref='scriptCapitalC'/><removeItem ref='scriptCapitalD'/><removeItem ref='scriptCapitalE'/><removeItem ref='scriptCapitalF'/><removeItem ref='scriptCapitalG'/><removeItem ref='scriptCapitalH'/><removeItem ref='scriptCapitalI'/><removeItem ref='scriptCapitalJ'/><removeItem ref='scriptCapitalK'/><removeItem ref='scriptCapitalL'/><removeItem ref='scriptCapitalM'/><removeItem ref='scriptCapitalN'/><removeItem ref='scriptCapitalO'/><removeItem ref='scriptCapitalP'/><removeItem ref='scriptCapitalQ'/><removeItem ref='scriptCapitalR'/><removeItem ref='scriptCapitalS'/><removeItem ref='scriptCapitalT'/><removeItem ref='scriptCapitalU'/><removeItem ref='scriptCapitalV'/><removeItem ref='scriptCapitalW'/><removeItem ref='scriptCapitalX'/><removeItem ref='scriptCapitalY'/><removeItem ref='scriptCapitalZ'/><removeItem ref='scriptA'/><removeItem ref='scriptB'/><removeItem ref='scriptC'/><removeItem ref='scriptD'/><removeItem ref='scriptE'/><removeItem ref='scriptF'/><removeItem ref='scriptG'/><removeItem ref='scriptH'/><removeItem ref='scriptI'/><removeItem ref='scriptJ'/><removeItem ref='scriptK'/><removeItem ref='scriptL'/><removeItem ref='scriptM'/><removeItem ref='scriptN'/><removeItem ref='scriptO'/><removeItem ref='scriptP'/><removeItem ref='scriptQ'/><removeItem ref='scriptR'/><removeItem ref='scriptS'/><removeItem ref='scriptT'/><removeItem ref='scriptU'/><removeItem ref='scriptV'/><removeItem ref='scriptW'/><removeItem ref='scriptX'/><removeItem ref='scriptY'/><removeItem ref='scriptZ'/><section rows='3'extraRows='3'><item ref='frakturCapitalA'/><item ref='frakturCapitalB'/><item ref='frakturCapitalC'/><item ref='frakturA'/><item ref='frakturB'/><item ref='frakturC'/><item ref='frakturCapitalA'extra='true'/><item ref='frakturCapitalB'extra='true'/><item ref='frakturCapitalC'extra='true'/><item ref='frakturCapitalD'extra='true'/><item ref='frakturCapitalE'extra='true'/><item ref='frakturCapitalF'extra='true'/><item ref='frakturCapitalG'extra='true'/><item ref='frakturCapitalH'extra='true'/><item ref='frakturCapitalI'extra='true'/><item ref='frakturCapitalJ'extra='true'/><item ref='frakturCapitalK'extra='true'/><item ref='frakturCapitalL'extra='true'/><item ref='frakturCapitalM'extra='true'/><item ref='frakturCapitalN'extra='true'/><item ref='frakturCapitalO'extra='true'/><item ref='frakturCapitalP'extra='true'/><item ref='frakturCapitalQ'extra='true'/><item ref='frakturCapitalR'extra='true'/><item ref='frakturCapitalS'extra='true'/><item ref='frakturCapitalT'extra='true'/><item ref='frakturCapitalU'extra='true'/><item ref='frakturCapitalV'extra='true'/><item ref='frakturCapitalW'extra='true'/><item ref='frakturCapitalX'extra='true'/><item ref='frakturCapitalY'extra='true'/><item ref='frakturCapitalZ'extra='true'/><empty extra='true'/><item ref='frakturA'extra='true'/><item ref='frakturB'extra='true'/><item ref='frakturC'extra='true'/><item ref='frakturD'extra='true'/><item ref='frakturE'extra='true'/><item ref='frakturF'extra='true'/><item ref='frakturG'extra='true'/><item ref='frakturH'extra='true'/><item ref='frakturI'extra='true'/><item ref='frakturJ'extra='true'/><item ref='frakturK'extra='true'/><item ref='frakturL'extra='true'/><item ref='frakturM'extra='true'/><item ref='frakturN'extra='true'/><item ref='frakturO'extra='true'/><item ref='frakturP'extra='true'/><item ref='frakturQ'extra='true'/><item ref='frakturR'extra='true'/><item ref='frakturS'extra='true'/><item ref='frakturT'extra='true'/><item ref='frakturU'extra='true'/><item ref='frakturV'extra='true'/><item ref='frakturW'extra='true'/><item ref='frakturX'extra='true'/><item ref='frakturY'extra='true'/><item ref='frakturZ'extra='true'/></section><section rows='3'extraRows='3'><item ref='scriptCapitalA'/><item ref='scriptCapitalB'/><item ref='scriptCapitalC'/><item ref='scriptA'/><item ref='scriptB'/><item ref='scriptC'/><item ref='scriptCapitalA'extra='true'/><item ref='scriptCapitalB'extra='true'/><item ref='scriptCapitalC'extra='true'/><item ref='scriptCapitalD'extra='true'/><item ref='scriptCapitalE'extra='true'/><item ref='scriptCapitalF'extra='true'/><item ref='scriptCapitalG'extra='true'/><item ref='scriptCapitalH'extra='true'/><item ref='scriptCapitalI'extra='true'/><item ref='scriptCapitalJ'extra='true'/><item ref='scriptCapitalK'extra='true'/><item ref='scriptCapitalL'extra='true'/><item ref='scriptCapitalM'extra='true'/><item ref='scriptCapitalN'extra='true'/><item ref='scriptCapitalO'extra='true'/><item ref='scriptCapitalP'extra='true'/><item ref='scriptCapitalQ'extra='true'/><item ref='scriptCapitalR'extra='true'/><item ref='scriptCapitalS'extra='true'/><item ref='scriptCapitalT'extra='true'/><item ref='scriptCapitalU'extra='true'/><item ref='scriptCapitalV'extra='true'/><item ref='scriptCapitalW'extra='true'/><item ref='scriptCapitalX'extra='true'/><item ref='scriptCapitalY'extra='true'/><item ref='scriptCapitalZ'extra='true'/><empty extra='true'/><item ref='scriptA'extra='true'/><item ref='scriptB'extra='true'/><item ref='scriptC'extra='true'/><item ref='scriptD'extra='true'/><item ref='scriptE'extra='true'/><item ref='scriptF'extra='true'/><item ref='scriptG'extra='true'/><item ref='scriptH'extra='true'/><item ref='scriptI'extra='true'/><item ref='scriptJ'extra='true'/><item ref='scriptK'extra='true'/><item ref='scriptL'extra='true'/><item ref='scriptM'extra='true'/><item ref='scriptN'extra='true'/><item ref='scriptO'extra='true'/><item ref='scriptP'extra='true'/><item ref='scriptQ'extra='true'/><item ref='scriptR'extra='true'/><item ref='scriptS'extra='true'/><item ref='scriptT'extra='true'/><item ref='scriptU'extra='true'/><item ref='scriptV'extra='true'/><item ref='scriptW'extra='true'/><item ref='scriptX'extra='true'/><item ref='scriptY'extra='true'/><item ref='scriptZ'extra='true'/></section><section rows='3'><item ref='&#8465;'/><item ref='&#8476;'/><item ref='ell'/><item ref='&#8501;'/><item ref='&#8472;'/><item ref='&#8497;'/><item ref='&#8466;'/><item ref='zTransform'/></section></tab><tab name='매트릭스'><section><item ref='table'/><item ref='squareTable'/><item ref='verticalLineTable'/><item ref='parenthesisTable'/></section><section><item ref='column'/><item ref='row'/><item ref='squareColumn'/><item ref='squareRow'/><item ref='parenthesisColumn'/><item ref='parenthesisRow'/><item ref='lCurlyColumn'/><item ref='rCurlyColumn'/><item ref='piecewiseFunction'/><item ref='equationAlign'/><item ref='separatedParenthesisTable'/></section><section><item ref='3RowsStackWithLine'/><item ref='3RowsStackWithLineAndPlusSign'/><item ref='3RowsStackWithLineAndMinusSign'/><item ref='3RowsStackWithLineAndMultiplicationSign'/><item ref='longDivision'/><item ref='longDivisionWithRemainder'/><item ref='longDivisionShortStackedRightRight'/><item ref='longDivisionShortStackedRightRightWithRemainder'/></section></tab><tab name='분수, 제곱근 &amp; 첨자'><section><item ref='fraction'/><item ref='bevelledFraction'/><item ref='smallFraction'/><item ref='smallBevelledFraction'/></section><section><item ref='squareRoot'/><item ref='nRoot'/></section><section><item ref='superscript'/><item ref='subsuperscript'/><item ref='subscript'/><item ref='leftSuperscript'/><item ref='leftSubscriptAndSuperscript'/><item ref='leftSubscript'/><item ref='over'/><item ref='underover'/><item ref='under'/></section><section><item ref='digitSpace'/><item ref='backSpace'/><item ref='thinnerSpace'/></section></tab><tab name='미적분 &amp; 삼각함수'><section><item ref='integralSubsuperscript'/><item ref='integralSubscript'/><item ref='integralSubsuperscriptD'/><item ref='integralSubscriptD'/></section><section><item ref='differentialD'/><item ref='&#8706;'/><item ref='fracDiff'/><item ref='fracPartial'/></section><section><item ref='curl'/><item ref='divergence'/><item ref='gradient'/><item ref='laplacian'/></section><section><item ref='limitToInfinity'/><item ref='limitUnder'/></section><section><item ref='&#8747;'/><item ref='&#8750;'/><item ref='&#8748;'/><item ref='&#8751;'/><item ref='&#8749;'/><item ref='&#8752;'/></section><section><item ref='log'/><item ref='nlog'/><item ref='naturalLog'/></section><section><item ref='sinus'/><item ref='cosinus'/><item ref='tangent'/><item ref='cosecant'/><item ref='secant'/><item ref='cotangent'/><item ref='asin'/><item ref='acos'/><item ref='atan'/><item ref='arcsinus'/><item ref='arccosinus'/><item ref='arctangent'/><item ref='inverseSecant'/><item ref='inverseCosecant'/><item ref='inverseCotangent'/></section></tab><removeTab ref='contextual'/></toolbar>"
+     if ('toolbar' in this.editorAttributes) {
+       ({ toolbar } = this.editorAttributes);
+     }
+diff --git a/node_modules/@wiris/mathtype-html-integration-devkit/src/core.src.js b/node_modules/@wiris/mathtype-html-integration-devkit/src/core.src.js
+index e72c18e..8362707 100644
+--- a/node_modules/@wiris/mathtype-html-integration-devkit/src/core.src.js
++++ b/node_modules/@wiris/mathtype-html-integration-devkit/src/core.src.js
+@@ -725,6 +725,187 @@ export default class Core {
+     this.modalDialog.open();
+   }
+ 
++  setModalDialog(target, isIframe) {
++    // Textarea elements don't have normal document ranges. It only accepts latex edit.
++    this.editMode = 'images';
++
++    // In IE is needed keep the range due to after focus the modal window
++    // it can't be retrieved the last selection.
++    try {
++      if (isIframe) {
++        // Is needed focus the target first.
++        target.contentWindow.focus();
++        const selection = target.contentWindow.getSelection();
++        this.editionProperties.range = selection.getRangeAt(0);
++      } else {
++        // Is needed focus the target first.
++        target.focus();
++        const selection = getSelection();
++        this.editionProperties.range = selection.getRangeAt(0);
++      }
++    } catch (e) {
++      this.editionProperties.range = null;
++    }
++
++    if (isIframe === undefined) {
++      isIframe = true;
++    }
++
++    this.editionProperties.latexRange = null;
++
++    if (target) {
++      let selectedItem;
++      if (typeof this.integrationModel.getSelectedItem !== 'undefined') {
++        selectedItem = this.integrationModel.getSelectedItem(target, isIframe);
++      } else {
++        selectedItem = Util.getSelectedItem(target, isIframe);
++      }
++
++      // Check LaTeX if and only if the node is a text node (nodeType==3).
++      if (selectedItem) {
++        // Case when image was selected and button pressed.
++        if (!selectedItem.caretPosition && Util.containsClass(selectedItem.node, Configuration.get('imageClassName'))) {
++          this.editionProperties.temporalImage = selectedItem.node;
++          this.editionProperties.isNewElement = false;
++        } else if (selectedItem.node.nodeType === 3) {
++          // If it's a text node means that editor is working with LaTeX.
++          if (this.integrationModel.getMathmlFromTextNode) {
++            // If integration has this function it isn't set range due to we don't
++            // know if it will be put into a textarea as a text or image.
++            const mathml = this.integrationModel.getMathmlFromTextNode(
++              selectedItem.node,
++              selectedItem.caretPosition,
++            );
++            if (mathml) {
++              this.editMode = 'latex';
++              this.editionProperties.isNewElement = false;
++              this.editionProperties.temporalImage = document.createElement('img');
++              this.editionProperties.temporalImage.setAttribute(
++                Configuration.get('imageMathmlAttribute'),
++                MathML.safeXmlEncode(mathml),
++              );
++            }
++          } else {
++            const latexResult = Latex.getLatexFromTextNode(
++              selectedItem.node,
++              selectedItem.caretPosition,
++            );
++            if (latexResult) {
++              const mathml = Latex.getMathMLFromLatex(latexResult.latex);
++              this.editMode = 'latex';
++              this.editionProperties.isNewElement = false;
++              this.editionProperties.temporalImage = document.createElement('img');
++              this.editionProperties.temporalImage.setAttribute(
++                Configuration.get('imageMathmlAttribute'),
++                MathML.safeXmlEncode(mathml),
++              );
++              const windowTarget = isIframe ? target.contentWindow : window;
++
++              if (target.tagName.toLowerCase() !== 'textarea') {
++                if (document.selection) {
++                  let leftOffset = 0;
++                  let previousNode = latexResult.startNode.previousSibling;
++
++                  while (previousNode) {
++                    leftOffset += Util.getNodeLength(previousNode);
++                    previousNode = previousNode.previousSibling;
++                  }
++
++                  this.editionProperties.latexRange = windowTarget.document.selection.createRange();
++                  this.editionProperties.latexRange.moveToElementText(
++                    latexResult.startNode.parentNode,
++                  );
++                  this.editionProperties.latexRange.move(
++                    'character',
++                    leftOffset + latexResult.startPosition,
++                  );
++                  this.editionProperties.latexRange.moveEnd(
++                    'character',
++                    latexResult.latex.length + 4,
++                  ); // Plus 4 for the '$$' characters.
++                } else {
++                  this.editionProperties.latexRange = windowTarget.document.createRange();
++                  this.editionProperties.latexRange.setStart(
++                    latexResult.startNode,
++                    latexResult.startPosition,
++                  );
++                  this.editionProperties.latexRange.setEnd(
++                    latexResult.endNode,
++                    latexResult.endPosition,
++                  );
++                }
++              }
++            }
++          }
++        }
++      } else if (target.tagName.toLowerCase() === 'textarea') {
++        // By default editMode is 'images', but when target is a textarea it needs to be 'latex'.
++        this.editMode = 'latex';
++      }
++    }
++
++    // Setting an object with the editor parameters.
++    // Editor parameters can be customized in several ways:
++    // 1 - editorAttributes: Contains the default editor attributes,
++    //  usually the metrics in a comma separated string. Always exists.
++    // 2 - editorParameters: Object containing custom editor parameters.
++    // These parameters are defined in the backend. So they affects all integration instances.
++
++    // The backend send the default editor attributes in a coma separated
++    // with the following structure: key1=value1,key2=value2...
++    const defaultEditorAttributesArray = Configuration.get('editorAttributes').split(', ');
++    const defaultEditorAttributes = {};
++    for (let i = 0, len = defaultEditorAttributesArray.length; i < len; i += 1) {
++      const tempAttribute = defaultEditorAttributesArray[i].split('=');
++      const key = tempAttribute[0];
++      const value = tempAttribute[1];
++      defaultEditorAttributes[key] = value;
++    }
++    // Custom editor parameters.
++    const editorAttributes = {};
++    // Editor parameters in backend, usually configuration.ini.
++    const serverEditorParameters = Configuration.get('editorParameters');
++    // Editor parameters through JavaScript configuration.
++    const cliendEditorParameters = this.integrationModel.editorParameters;
++    Object.assign(editorAttributes, defaultEditorAttributes, serverEditorParameters);
++    Object.assign(editorAttributes, defaultEditorAttributes, cliendEditorParameters);
++
++    editorAttributes.language = this.language;
++    editorAttributes.rtl = this.integrationModel.rtl;
++
++    const contentManagerAttributes = {};
++    contentManagerAttributes.editorAttributes = editorAttributes;
++    contentManagerAttributes.language = this.language;
++    contentManagerAttributes.customEditors = this.customEditors;
++    contentManagerAttributes.environment = this.environment;
++
++    if (this.modalDialog == null) {
++      this.modalDialog = new ModalDialog(editorAttributes);
++      this.contentManager = new ContentManager(contentManagerAttributes);
++      // When an instance of ContentManager is created we need to wait until
++      // the ContentManager is ready by listening 'onLoad' event.
++      const listener = Listeners.newListener('onLoad', () => {
++        this.contentManager.isNewElement = this.editionProperties.isNewElement;
++        if (this.editionProperties.temporalImage != null) {
++          const mathML = MathML.safeXmlDecode(this.editionProperties.temporalImage.getAttribute(Configuration.get('imageMathmlAttribute')));
++          this.contentManager.mathML = mathML;
++        }
++      });
++      this.contentManager.addListener(listener);
++      this.contentManager.init();
++      this.modalDialog.setContentManager(this.contentManager);
++      this.contentManager.setModalDialogInstance(this.modalDialog);
++    } else {
++      this.contentManager.isNewElement = this.editionProperties.isNewElement;
++      if (this.editionProperties.temporalImage != null) {
++        const mathML = MathML.safeXmlDecode(this.editionProperties.temporalImage.getAttribute(Configuration.get('imageMathmlAttribute')));
++        this.contentManager.mathML = mathML;
++      }
++    }
++    this.contentManager.setIntegrationModel(this.integrationModel);
++    // this.modalDialog.first_create();
++  }
++
+   /**
+    * Returns the {@link CustomEditors} instance.
+    * @return {CustomEditors} The current {@link CustomEditors} instance.
+diff --git a/node_modules/@wiris/mathtype-html-integration-devkit/src/integrationmodel.js b/node_modules/@wiris/mathtype-html-integration-devkit/src/integrationmodel.js
+index 0643d89..c0d71d5 100644
+--- a/node_modules/@wiris/mathtype-html-integration-devkit/src/integrationmodel.js
++++ b/node_modules/@wiris/mathtype-html-integration-devkit/src/integrationmodel.js
+@@ -5,6 +5,7 @@ import Listeners from './listeners';
+ import Util from './util';
+ import Configuration from './configuration';
+ import ServiceProvider from './serviceprovider';
++import ModalDialog from './modal';
+ 
+ /**
+  * @typedef {Object} IntegrationModelProperties
+@@ -175,7 +176,6 @@ export default class IntegrationModel {
+   init() {
+     // Check if language is an object and select the property necessary
+     this.language = this.getLanguage();
+-
+     // We need to wait until Core class is loaded ('onLoad' event) before
+     // call the callback method.
+     const listener = Listeners.newListener('onLoad', () => {
+@@ -289,6 +289,11 @@ export default class IntegrationModel {
+     this.core.openModalDialog(this.target, this.isIframe);
+   }
+ 
++  closeNewFormulaEditor() {
++    this.core.editionProperties.isNewElement = true;
++    this.core.setModalDialog(this.target, this.isIframe);
++  }
++
+   /**
+    * Opens formula editor to editing an existing formula. Can be overwritten in order to make some
+    * actions from integration part before the formula is edited.
+diff --git a/node_modules/@wiris/mathtype-html-integration-devkit/src/modal.js b/node_modules/@wiris/mathtype-html-integration-devkit/src/modal.js
+index e69832a..426184f 100644
+--- a/node_modules/@wiris/mathtype-html-integration-devkit/src/modal.js
++++ b/node_modules/@wiris/mathtype-html-integration-devkit/src/modal.js
+@@ -40,8 +40,10 @@ export default class ModalDialog {
+ 
+     // Metrics.
+     const ua = navigator.userAgent.toLowerCase();
+-    const isAndroid = ua.indexOf('android') > -1;
+-    const isIOS = ContentManager.isIOS();
++    // const isAndroid = ua.indexOf('android') > -1;
++    // const isIOS = ContentManager.isIOS();
++    const isAndroid = false;
++    const isIOS = false;
+     this.iosSoftkeyboardOpened = false;
+     this.iosMeasureUnit = ua.indexOf('crios') === -1 ? '%' : 'vh';
+     this.iosDivHeight = `100%${this.iosMeasureUnit}`;
+@@ -316,6 +318,13 @@ export default class ModalDialog {
+   /**
+    * Creates the modal window object inserting a contentElement object.
+    */
++  first_create() {
++    if (this.contentManager != null) {
++      this.contentManager.insert(this);
++    }
++  }
++
++
+   create() {
+     /* Modal Window Structure
+     _____________________________________________________________________________________
+@@ -488,9 +497,12 @@ export default class ModalDialog {
+     // Removing close class.
+     this.removeClass('wrs_closed');
+     // Hiding keyboard for mobile devices.
+-    const { isIOS } = this.deviceProperties;
+-    const { isAndroid } = this.deviceProperties;
+-    const { isMobile } = this.deviceProperties;
++    // const { isIOS } = this.deviceProperties;
++    // const { isAndroid } = this.deviceProperties;
++    // const { isMobile } = this.deviceProperties;
++    const { isIOS } = false;
++    const { isAndroid } = false;
++    const { isMobile } = false;
+     if (isIOS || isAndroid || isMobile) {
+       // Restore scale to 1.
+       this.restoreWebsiteScale();
